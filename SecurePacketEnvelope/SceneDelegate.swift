@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         self.window?.windowScene = windowScene
-        let rootViewController = MainViewController()
+        let rootViewController = MainViewController(viewModel: MainViewModel())
         let rootNavigationController = UINavigationController.init(rootViewController: rootViewController)
         self.window?.rootViewController = rootNavigationController
         self.window?.makeKeyAndVisible()
@@ -51,7 +51,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 
