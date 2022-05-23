@@ -56,14 +56,14 @@ class MainViewController: UIViewController {
     }()
     
     private lazy var txtFullName : UITextField = {
-        let txtUserName = UITextField()
-        txtUserName.textColor = UIColor.gray
-        txtUserName.borderStyle = .line
-        txtUserName.layer.borderColor = UIColor.gray.cgColor
-        txtUserName.layer.borderWidth = 1.0
+        let txtFullName = UITextField()
+        txtFullName.textColor = UIColor.gray
+        txtFullName.borderStyle = .line
+        txtFullName.layer.borderColor = UIColor.gray.cgColor
+        txtFullName.layer.borderWidth = 1.0
         txtFullName.addTarget(self, action: #selector(txtFullName_EditingChanged)
                               , for: UIControl.Event.editingChanged)
-        return txtUserName
+        return txtFullName
     }()
     
     private lazy var txtEmail : UITextField = {
@@ -79,12 +79,12 @@ class MainViewController: UIViewController {
     }()
     
     private lazy var txtAge : UITextField = {
-        let txtUserName = UITextField()
-        txtUserName.textColor = UIColor.gray
-        txtUserName.borderStyle = .line
-        txtUserName.layer.borderColor = UIColor.gray.cgColor
-        txtUserName.layer.borderWidth = 1.0
-        return txtUserName
+        let txtAge = UITextField()
+        txtAge.textColor = UIColor.gray
+        txtAge.borderStyle = .line
+        txtAge.layer.borderColor = UIColor.gray.cgColor
+        txtAge.layer.borderWidth = 1.0
+        return txtAge
     }()
     
     private lazy var statsView: UIStackView = {
@@ -168,6 +168,7 @@ class MainViewController: UIViewController {
             .sink(receiveValue: { (isEnable) in
                 if isEnable {
                     self.btnEncrypt.isEnabled = true
+                    return
                 } else {
                     self.btnEncrypt.isEnabled = false
                 }

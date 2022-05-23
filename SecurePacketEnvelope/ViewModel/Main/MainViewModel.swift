@@ -64,8 +64,8 @@ extension MainViewModel {
      var formValidation: AnyPublisher<(String, String)?, Never> {
         
        return Publishers.CombineLatest(validateFullName, validateEmail)
-            .map { name, pass in
-                guard let name = name, let pass = pass else {
+            .map { fullName, email in
+                guard let name = fullName, let pass = email else {
                     return nil
                 }
                 return (name, pass)
