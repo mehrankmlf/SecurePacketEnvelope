@@ -154,6 +154,7 @@
 		027E3F5828375A4F00F17ABA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A80184C9283B6BE60001BD68 /* Constants.swift */,
 				027E3F5E28375E6600F17ABA /* Extensions */,
 			);
 			path = Classes;
@@ -173,7 +174,6 @@
 				027E3F5F28375E7900F17ABA /* Data + Extension.swift */,
 				027E3F6128375EDF00F17ABA /* String + Extension.swift */,
 				027E3F632837716000F17ABA /* Encodable + Extension.swift */,
-				A80184C9283B6BE60001BD68 /* Constants.swift */,
 				A80184CB283B6FFE0001BD68 /* Extension + TextField.swift */,
 			);
 			path = Extensions;

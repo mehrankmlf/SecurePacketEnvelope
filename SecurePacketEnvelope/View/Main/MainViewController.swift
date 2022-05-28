@@ -130,6 +130,18 @@ class MainViewController: UIViewController {
         bindViewModel()
     }
     
+    @objc func encryptAction() {
+        self.createSecruePacketEnvelope()
+    }
+    
+    @objc func txtFullName_EditingChanged(textField: UITextField) {
+        self.viewModel?.fullName = textField.text ?? ""
+    }
+    
+    @objc func txtEmail_EditingChanged(textField: UITextField) {
+        self.viewModel?.email = textField.text ?? ""
+    }
+    
     private func setupUI() {
         let elements = [viewContainer,
                         lblTitle,
@@ -142,8 +154,11 @@ class MainViewController: UIViewController {
     }
     
     private func createSecruePacketEnvelope() {
-        let encryptedData = UserModel.fakeData()
-        let data = encryptedData.convertToString
+        let rawData = UserModel.init(name: self.txtFullName.text,
+                                     familyName: self.txtEmail.text,
+                                     age: Int(self.txtAge.text ?? ""))
+        let jsonData = rawData.convertToString?.aesEncrypt(key: <#T##String#>, iv: <#T##String#>)
+        print(jsonData)
     }
     
     private func bindViewModel() {
@@ -176,18 +191,6 @@ class MainViewController: UIViewController {
             })
             .store(in: &bag)
     }
-    
-    @objc func encryptAction() {
-        
-    }
-    
-    @objc func txtFullName_EditingChanged(textField: UITextField) {
-        self.viewModel?.fullName = textField.text ?? ""
-    }
-    
-    @objc func txtEmail_EditingChanged(textField: UITextField) {
-        self.viewModel?.email = textField.text ?? ""
-    }
 }
 
 extension MainViewController {
@@ -205,6 +208,5 @@ extension MainViewController {
         btnEncrypt.leadingAnchor.constraint(equalTo: statsView.leadingAnchor).isActive = true
         btnEncrypt.trailingAnchor.constraint(equalTo: statsView.trailingAnchor).isActive = true
         btnEncrypt.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
     }
 }

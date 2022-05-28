@@ -35,10 +35,9 @@ extension MainViewModel {
                     self.fullNameMessagePublisher.send("Minimum of 3 characters required")
                     return nil
                 }
-                
                 self.fullNameMessagePublisher.send("")
-                
                 return fullName
+                
             }.eraseToAnyPublisher()
     }
     
@@ -58,6 +57,7 @@ extension MainViewModel {
                     return nil
                 }
                 return validateEmail
+                
             }.eraseToAnyPublisher()
     }
     
