@@ -23,6 +23,9 @@
 		A80184C7283B6B4E0001BD68 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80184C6283B6B4E0001BD68 /* MainViewModel.swift */; };
 		A80184CA283B6BE60001BD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80184C9283B6BE60001BD68 /* Constants.swift */; };
 		A80184CC283B6FFE0001BD68 /* Extension + TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80184CB283B6FFE0001BD68 /* Extension + TextField.swift */; };
+		A82929152841F14E0012ECF5 /* UITopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */; };
+		A82929172841FBF10012ECF5 /* RSAHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82929162841FBF10012ECF5 /* RSAHelper.swift */; };
+		A8292919284229AB0012ECF5 /* RSAKeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8292918284229AB0012ECF5 /* RSAKeyHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,9 @@
 		A80184C6283B6B4E0001BD68 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A80184C9283B6BE60001BD68 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A80184CB283B6FFE0001BD68 /* Extension + TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + TextField.swift"; sourceTree = "<group>"; };
+		A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITopAlignedLabel.swift; sourceTree = "<group>"; };
+		A82929162841FBF10012ECF5 /* RSAHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAHelper.swift; sourceTree = "<group>"; };
+		A8292918284229AB0012ECF5 /* RSAKeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAKeyHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,8 +160,11 @@
 		027E3F5828375A4F00F17ABA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A80184C9283B6BE60001BD68 /* Constants.swift */,
 				027E3F5E28375E6600F17ABA /* Extensions */,
+				A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */,
+				A80184C9283B6BE60001BD68 /* Constants.swift */,
+				A82929162841FBF10012ECF5 /* RSAHelper.swift */,
+				A8292918284229AB0012ECF5 /* RSAKeyHelper.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -336,8 +345,11 @@
 			files = (
 				027E3F5628375A3800F17ABA /* MainViewController.swift in Sources */,
 				027E3F6028375E7900F17ABA /* Data + Extension.swift in Sources */,
+				A8292919284229AB0012ECF5 /* RSAKeyHelper.swift in Sources */,
 				027E3F67283771A600F17ABA /* UserModel.swift in Sources */,
+				A82929152841F14E0012ECF5 /* UITopAlignedLabel.swift in Sources */,
 				027E3F6228375EDF00F17ABA /* String + Extension.swift in Sources */,
+				A82929172841FBF10012ECF5 /* RSAHelper.swift in Sources */,
 				027E3F26283759FB00F17ABA /* AppDelegate.swift in Sources */,
 				A80184CA283B6BE60001BD68 /* Constants.swift in Sources */,
 				027E3F28283759FB00F17ABA /* SceneDelegate.swift in Sources */,
