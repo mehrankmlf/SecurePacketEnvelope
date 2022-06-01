@@ -10,10 +10,8 @@ import Combine
 
 class MainViewController: UIViewController {
     
-    let PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArdklK4kIsOMuxTZ8jG1PRPfXqSDmaCIQ+xEpIRSssQ6jiuvhYZTMUbV22osgtivuyKdnHm+cvzGuZCSB8QFyCcM7l09HZVs0blLkrBAU5CVSv+6BzPQTVJytoi/VO4mlf6me1Y9bXWrrPw1YtC1mnB2Ix9cuaxOLpucglfGbUaGEigsUZMTD2vuEODN5cJi39ap+G9ILitbrnt+zsW9354pokVnHw4Oq837Fd7ZtP0nAA5F6nE3FNDGQqLy2WYRoKC9clDecD8T933azUD98b5FSUGzIhwiuqHHeylfVbevbBW91Tvg9s7vUMr0Y2YDpEmPAf0q4PlDt8QsjctT9kQIDAQAB"
-
-    let PRIVATE_KEY = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCt2SUriQiw4y7FNnyMbU9E99epIOZoIhD7ESkhFKyxDqOK6+FhlMxRtXbaiyC2K+7Ip2ceb5y/Ma5kJIHxAXIJwzuXT0dlWzRuUuSsEBTkJVK/7oHM9BNUnK2iL9U7iaV/qZ7Vj1tdaus/DVi0LWacHYjH1y5rE4um5yCV8ZtRoYSKCxRkxMPa+4Q4M3lwmLf1qn4b0guK1uue37Oxb3fnimiRWcfDg6rzfsV3tm0/ScADkXqcTcU0MZCovLZZhGgoL1yUN5wPxP3fdrNQP3xvkVJQbMiHCK6ocd7KV9Vt69sFb3VO+D2zu9QyvRjZgOkSY8B/Srg+UO3xCyNy1P2RAgMBAAECggEAInVN9skcneMJ3DEmkrb/5U2yw2UwBifqcbk/C72LVTTvmZOTgsH5laCARGUbQMCIfeEggVniGcuBI3xQ/TIqJmE6KI2gOyjOxadMiAZP/cCgHEbsF3Gxey3rBKCyhTCNSzaVswLNO0D8C+1bTatKEVuRRvsRykt/fL+HJ/FRteYYO9LuLv2WESJGE6zsi03P6snNiRracvYqz+Rnrvf1Xuyf58wC1C6JSjZ9D6tootPDBTEYaIIbpEnV+qP/3k5OFmA9k4WbkZI6qYzqSK10bTQbjMySbatovnCD/oqIUOHLwZpL051E9lz1ZUnDbrxKwT0BIU7y4DYaHSzrKqRsIQKBgQDTQ9DpiuI+vEj0etgyJgPBtMa7ClTY+iSd0ccgSE9623hi1CHtgWaYp9C4Su1GBRSF0xlQoVTuuKsVhI89far2Z0hR9ULr1J1zugMcNESaBBC17rPoRvXPJT16U920Ntwr00LviZ/DEyvmpVDagYy+mSK0Wq+kH7p5aR5zAHXWrQKBgQDSqQ6TBr5bDMvhpRi94unghiWyYL6srSRV9XjqDpiNU+yFwCLzSG610DyXFa3pV138P+ryunqg1LtKsOOtZJONzbS1paINnwkvfwzMpI7TjCq1+8rxeEhZ3AVmumDtPQK+YfGbxCQ+LAOJZOu8lGv1O7tsbXFp0vh5RmWHWHvy9QKBgCMGPi9JsCJ4cpvdddQyizLk9oFxwAlMxx9G9P08H7kdg4LW6l0Gs+yg/bBf86BFHVbmXW8JoBwHj418sYafO+Wnz8yOna6dTBEwiG13mNvzypVu4nKiuQPDh8Ks/rdu1OeLGbC+nzbnCcMuKw5epee/WYqO8kmCXRbdv4ePTvntAoGBAJYQ9F7saOI3pW2izJNIeE8HgQcnP+2GkeHiMjaaGzZiWJWXH86rBKLkKqV+PhuBr2QorFgpW34CzUER7b7xbOORbHASA/UsG8EIArgtacltimeFbTbC9td8kyRxFOcrlS7GWvUZrq/TbtmLWRtHp/hUitlcxXQbZAIQkfbuo62ZAoGBAKBURvLGM0ethkvUHFyGae2YGG/s+u+EYd2zNba7A6qnfzrlMHVPiPO6lx31+HwhuJ0tBZWMJKhEZ5PWByZzreVKVH5fE5LoQLo+B3VCTyTc1fJ9RKLAPrPqHuvzPHHP/n84XHGeit3e4ytd3Mm/6CNbrg7xux2M4RDQmN//1UOY"
-    
+    var key : EncryptionKey!
+    var aesHelper : AESHelper?
     var viewModel : MainViewModel?
     var bag = Set<AnyCancellable>()
     
@@ -132,8 +130,9 @@ class MainViewController: UIViewController {
         return btnSubmit
     }()
     
-    init(viewModel : MainViewModel) {
+    init(viewModel : MainViewModel, aesHelper : AESHelper) {
         self.viewModel = viewModel
+        self.aesHelper = aesHelper
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -175,17 +174,17 @@ class MainViewController: UIViewController {
     }
     
     private func createSecruePacketEnvelope() {
-        let rawData = UserModel.init(name: self.txtFullName.text,
+        let userData = UserModel.init(name: self.txtFullName.text,
                                      familyName: self.txtEmail.text,
                                      age: Int(self.txtAge.text ?? ""))
-        let iv = generateRandomString(length: 16)
-        let secret = generateRandomString(length: 16)
-        let encryptData = rawData.convertToString?.aesEncrypt(key: secret, iv: iv)
+        
+        guard let iv = aesHelper?.generateIV(), let secret = aesHelper?.genereteSecret() else {return}
+        let encryptData = userData.convertToString?.aesEncrypt(key: secret, iv: iv)
         self.lblEncrypted.text = encryptData
 
-        let encRSA = MZRSA.encryptString(secret, publicKey: PUBLIC_KEY)!
+        let encRSA = MZRSA.encryptString(secret, publicKey: EncryptionKey.publicKey.key)!
         print(encRSA)
-        let decRSA = MZRSA.decryptString(encRSA, privateKey: PRIVATE_KEY)!
+        let decRSA = MZRSA.decryptString(encRSA, privateKey: EncryptionKey.privateKey.key)!
         print(decRSA)
     }
     
@@ -219,12 +218,7 @@ class MainViewController: UIViewController {
             })
             .store(in: &bag)
     }
-    
-      func generateRandomString(length: Int) -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        return String((0..<length).map{ _ in letters.randomElement()! })
-    }
-    
+
      func EncryptRSAFromData(data : String, publicKey: SecKey) -> Data? {
         
         let error:UnsafeMutablePointer<Unmanaged<CFError>?>? = nil
