@@ -9,130 +9,16 @@ import UIKit
 import Combine
 
 class MainViewController: UIViewController {
-    
-    var key : EncryptionKey!
+
     var aesHelper : AESHelper?
     var viewModel : MainViewModel?
+    var contentView : MainView?
     var bag = Set<AnyCancellable>()
     
-    private var viewContainer : UIView = {
-        let viewContainer = UIView()
-        viewContainer.backgroundColor = .white
-        return viewContainer
-    }()
-    
-    private lazy var lblTitle : UILabel = {
-        let lblTop = UILabel()
-        lblTop.text = "Enter Your Data"
-        lblTop.textColor = Color.fontTextColor
-        lblTop.font = UIFont.boldSystemFont(ofSize: 35)
-        lblTop.translatesAutoresizingMaskIntoConstraints = false
-        return lblTop
-    }()
-    
-    private lazy var lblFullName : UILabel = {
-        let lblTop = UILabel()
-        lblTop.text = "Full Name"
-        lblTop.textColor = Color.fontTextColor
-        lblTop.font = UIFont.boldSystemFont(ofSize: 15)
-        lblTop.translatesAutoresizingMaskIntoConstraints = false
-        return lblTop
-    }()
-    
-    private lazy var lblEmail : UILabel = {
-        let lblTop = UILabel()
-        lblTop.text = "Email"
-        lblTop.textColor = Color.fontTextColor
-        lblTop.font = UIFont.boldSystemFont(ofSize: 15)
-        lblTop.translatesAutoresizingMaskIntoConstraints = false
-        return lblTop
-    }()
-    
-    private lazy var lblAge : UILabel = {
-        let lblAge = UILabel()
-        lblAge.text = "Age"
-        lblAge.textColor = Color.fontTextColor
-        lblAge.font = UIFont.boldSystemFont(ofSize: 15)
-        lblAge.translatesAutoresizingMaskIntoConstraints = false
-        return lblAge
-    }()
-    
-    private lazy var txtFullName : UITextField = {
-        let txtFullName = UITextField()
-        txtFullName.textColor = UIColor.gray
-        txtFullName.borderStyle = .line
-        txtFullName.layer.borderColor = UIColor.gray.cgColor
-        txtFullName.layer.borderWidth = 1.0
-        txtFullName.addTarget(self, action: #selector(txtFullName_EditingChanged)
-                              , for: UIControl.Event.editingChanged)
-        return txtFullName
-    }()
-    
-    private lazy var txtEmail : UITextField = {
-        let txtEmail = UITextField()
-        txtEmail.textColor = UIColor.gray
-        txtEmail.borderStyle = .line
-        txtEmail.layer.borderColor = UIColor.gray.cgColor
-        txtEmail.layer.borderWidth = 1.0
-        txtEmail.addTarget(self, action: #selector(txtEmail_EditingChanged)
-                           , for: UIControl.Event.editingChanged)
-
-        return txtEmail
-    }()
-    
-    private lazy var txtAge : UITextField = {
-        let txtAge = UITextField()
-        txtAge.textColor = UIColor.gray
-        txtAge.borderStyle = .line
-        txtAge.layer.borderColor = UIColor.gray.cgColor
-        txtAge.layer.borderWidth = 1.0
-        txtAge.keyboardType = .numberPad
-        return txtAge
-    }()
-    
-    private lazy var lblEncrypted : UITopAlignedLabel = {
-        let lblEncrypted = UITopAlignedLabel()
-        lblEncrypted.text = ""
-        lblEncrypted.textColor = Color.fontTextColor
-        lblEncrypted.layer.borderWidth = 1
-        lblEncrypted.layer.borderColor = UIColor.gray.cgColor
-        lblEncrypted.numberOfLines = 0
-        lblEncrypted.font = UIFont.boldSystemFont(ofSize: 15)
-        lblEncrypted.translatesAutoresizingMaskIntoConstraints = false
-        return lblEncrypted
-    }()
-    
-    
-    private lazy var statsView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [lblFullName,
-                                                       txtFullName,
-                                                       lblEmail,
-                                                       txtEmail,
-                                                       lblAge,
-                                                       txtAge])
-        stackView.axis  = .vertical
-        stackView.distribution  = .fillEqually
-        stackView.alignment = .fill
-        stackView.spacing = 5
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private lazy var btnEncrypt : UIButton = {
-        let btnSubmit = UIButton()
-        btnSubmit.setTitle("Create Secure Envelope", for: .normal)
-        btnSubmit.backgroundColor = Color.buttonBackgroundColor
-        btnSubmit.setTitleColor(UIColor.white, for: .normal)
-        btnSubmit.clipsToBounds = true
-        btnSubmit.layer.cornerRadius = 10.0
-        btnSubmit.translatesAutoresizingMaskIntoConstraints = false
-        btnSubmit.addTarget(self, action: #selector(encryptAction), for: .touchUpInside)
-        return btnSubmit
-    }()
-    
-    init(viewModel : MainViewModel, aesHelper : AESHelper) {
+    init(viewModel : MainViewModel, contentView : MainView, aesHelper : AESHelper) {
         self.viewModel = viewModel
         self.aesHelper = aesHelper
+        self.contentView = contentView
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -140,13 +26,38 @@ class MainViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
+    override func loadView() {
+        view = contentView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Color.backGroundColor
-        setupUI()
         bindViewModel()
+        self.setUpTargets()
+        self.generateRSAKeypairs()
+    }
     
-        
+    private func setUpTargets() {
+        contentView?.txtFullName.addTarget(self, action: #selector(txtFullName_EditingChanged)
+                                           , for: UIControl.Event.editingChanged)
+        contentView?.txtEmail.addTarget(self, action: #selector(txtEmail_EditingChanged)
+                                        , for: UIControl.Event.editingChanged)
+        contentView?.btnEncrypt.addTarget(self, action: #selector(encryptAction), for: .touchUpInside)
+    }
+    
+    private func generateRSAKeypairs() {
+        kRSASwiftGeneratorApplicationTag = "securePacketEnvelope" //setup your id for keychain saving
+        kRSASwiftGeneratorKeySize = 1024 //keySize
+    // generade new key pair
+        RSAHelper.shared.createSecureKeyPair() { (succes,error) in
+            if succes {
+                self.contentView?.lblRSAKey.textColor = Color.greenTextColor
+            }else{
+                self.contentView?.lblRSAKey.textColor = Color.redTextColor
+                self.contentView?.lblRSAKey.alpha = 0.5
+            }
+        }
     }
     
     @objc func encryptAction() {
@@ -160,32 +71,30 @@ class MainViewController: UIViewController {
     @objc func txtEmail_EditingChanged(textField: UITextField) {
         self.viewModel?.email = textField.text ?? ""
     }
-    
-    private func setupUI() {
-        let elements = [viewContainer,
-                        lblTitle,
-                        statsView,
-                        btnEncrypt,
-                        lblEncrypted]
-        for element in elements {
-            view.addSubview(element)
-        }
-        makeAutolayout()
-    }
-    
-    private func createSecruePacketEnvelope() {
-        let userData = UserModel.init(name: self.txtFullName.text,
-                                     familyName: self.txtEmail.text,
-                                     age: Int(self.txtAge.text ?? ""))
-        
-        guard let iv = aesHelper?.generateIV(), let secret = aesHelper?.genereteSecret() else {return}
-        let encryptData = userData.convertToString?.aesEncrypt(key: secret, iv: iv)
-        self.lblEncrypted.text = encryptData
 
-        let encRSA = MZRSA.encryptString(secret, publicKey: EncryptionKey.publicKey.key)!
-        print(encRSA)
-        let decRSA = MZRSA.decryptString(encRSA, privateKey: EncryptionKey.privateKey.key)!
-        print(decRSA)
+    private func createSecruePacketEnvelope() {
+        let userData = UserModel.init(name: self.contentView?.txtFullName.text,
+                                      familyName: self.contentView?.txtEmail.text,
+                                      age: Int(self.contentView?.txtAge.text ?? ""))
+        
+        // generate IV and sercret Key for AES Data encryption.
+        guard let iv = aesHelper?.generateIV(), let secret = aesHelper?.genereteSecret() else {return}
+        // encrypt userData with AES.
+        let encryptData = userData.convertToString?.aesEncrypt(key: secret, iv: iv)
+        self.contentView?.lblEncrypted.text = encryptData
+        //ecrypt secret key with RSA.
+//        RSAHelper.shared.encryptMessageWithPublicKey(secret) { success,data,error in
+//            print(success)
+//            print(data)
+//            print(error)
+//        }
+        
+//        RSAHelper.shared.decryptMessageWithPrivateKey(<#T##encryptedData: Data##Data#>, completion: <#T##(Bool, String?, CryptoException?) -> Void##(Bool, String?, CryptoException?) -> Void##(_ success: Bool, _ result: String?, _ error: CryptoException?) -> Void#>)
+//
+//        let encRSA = MZRSA.encryptString(secret, publicKey: EncryptionKey.publicKey.key)!
+//        print(encRSA)
+//        let decRSA = MZRSA.decryptString(encRSA, privateKey: EncryptionKey.privateKey.key)!
+//        print(decRSA)
     }
     
     private func bindViewModel() {
@@ -193,14 +102,14 @@ class MainViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] text in
                 
-                guard let `self` = self else {
+                guard let `self` = self, let txtFullName = self.contentView?.txtFullName else {
                     return
                 }
                 
                 if text != "" {
-                    self.txtFullName.addRightView(txtField: self.txtFullName, str: "")
+                    self.contentView?.txtFullName.addRightView(txtField: txtFullName, str: "")
                 } else {
-                    self.txtFullName.addRightView(txtField: self.txtFullName, str: "👍🏻")
+                    self.contentView?.txtFullName.addRightView(txtField: txtFullName, str: "👍🏻")
                 }
             }.store(in: &bag)
         
@@ -209,12 +118,12 @@ class MainViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink(receiveValue: { (isEnable) in
                 if isEnable {
-                    self.btnEncrypt.isEnabled = true
+                    self.contentView?.btnEncrypt.isEnabled = true
                     return
                 } else {
-                    self.btnEncrypt.isEnabled = false
+                    self.contentView?.btnEncrypt.isEnabled = false
                 }
-                self.btnEncrypt.isEnabled = false
+                self.contentView?.btnEncrypt.isEnabled = false
             })
             .store(in: &bag)
     }
@@ -238,25 +147,3 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController {
-    private func makeAutolayout() {
-        lblTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        lblTitle.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30).isActive = true
-        lblTitle.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30).isActive = true
-        lblTitle.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
-        
-        statsView.topAnchor.constraint(equalTo: lblTitle.bottomAnchor, constant: 20).isActive = true
-        statsView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30).isActive = true
-        statsView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30).isActive = true
-        
-        btnEncrypt.topAnchor.constraint(equalTo: statsView.bottomAnchor, constant: 30).isActive = true
-        btnEncrypt.leadingAnchor.constraint(equalTo: statsView.leadingAnchor).isActive = true
-        btnEncrypt.trailingAnchor.constraint(equalTo: statsView.trailingAnchor).isActive = true
-        btnEncrypt.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        lblEncrypted.topAnchor.constraint(equalTo: btnEncrypt.bottomAnchor, constant: 30).isActive = true
-        lblEncrypted.leadingAnchor.constraint(equalTo: btnEncrypt.leadingAnchor).isActive = true
-        lblEncrypted.trailingAnchor.constraint(equalTo: btnEncrypt.trailingAnchor).isActive = true
-        lblEncrypted.heightAnchor.constraint(equalToConstant: 100).isActive = true
-    }
-}

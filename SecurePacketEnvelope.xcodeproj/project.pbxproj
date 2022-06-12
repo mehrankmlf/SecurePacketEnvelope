@@ -24,9 +24,10 @@
 		A80184CA283B6BE60001BD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80184C9283B6BE60001BD68 /* Constants.swift */; };
 		A80184CC283B6FFE0001BD68 /* Extension + TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80184CB283B6FFE0001BD68 /* Extension + TextField.swift */; };
 		A8127D3028473AF3001E625E /* AESHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8127D2F28473AF3001E625E /* AESHelper.swift */; };
-		A8127D3228474BAA001E625E /* EncryptionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8127D3128474BAA001E625E /* EncryptionKey.swift */; };
+		A81701F3285073BF0034D102 /* RSAHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81701F2285073BF0034D102 /* RSAHelper.swift */; };
+		A81701F5285080D90034D102 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81701F4285080D90034D102 /* Encryption.swift */; };
+		A81DEF0F2855EE02008B2D38 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81DEF0E2855EE02008B2D38 /* MainView.swift */; };
 		A82929152841F14E0012ECF5 /* UITopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */; };
-		A82929172841FBF10012ECF5 /* RSAHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82929162841FBF10012ECF5 /* RSAHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,9 +69,10 @@
 		A80184C9283B6BE60001BD68 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A80184CB283B6FFE0001BD68 /* Extension + TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + TextField.swift"; sourceTree = "<group>"; };
 		A8127D2F28473AF3001E625E /* AESHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESHelper.swift; sourceTree = "<group>"; };
-		A8127D3128474BAA001E625E /* EncryptionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionKey.swift; sourceTree = "<group>"; };
+		A81701F2285073BF0034D102 /* RSAHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAHelper.swift; sourceTree = "<group>"; };
+		A81701F4285080D90034D102 /* Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryption.swift; sourceTree = "<group>"; };
+		A81DEF0E2855EE02008B2D38 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITopAlignedLabel.swift; sourceTree = "<group>"; };
-		A82929162841FBF10012ECF5 /* RSAHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +164,7 @@
 		027E3F5828375A4F00F17ABA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A8127D2C284738D1001E625E /* EncryptionUseCases */,
+				A8127D2C284738D1001E625E /* Encryption */,
 				027E3F5E28375E6600F17ABA /* Extensions */,
 				A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */,
 				A80184C9283B6BE60001BD68 /* Constants.swift */,
@@ -173,6 +175,7 @@
 		027E3F5928375A5B00F17ABA /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				A81DEF0E2855EE02008B2D38 /* MainView.swift */,
 				027E3F5528375A3800F17ABA /* MainViewController.swift */,
 			);
 			path = Main;
@@ -214,14 +217,30 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		A8127D2C284738D1001E625E /* EncryptionUseCases */ = {
+		A8127D2C284738D1001E625E /* Encryption */ = {
 			isa = PBXGroup;
 			children = (
-				A82929162841FBF10012ECF5 /* RSAHelper.swift */,
-				A8127D2F28473AF3001E625E /* AESHelper.swift */,
-				A8127D3128474BAA001E625E /* EncryptionKey.swift */,
+				A81701EE28506B0F0034D102 /* AESHelper */,
+				A81701ED28506B050034D102 /* RSAHelper */,
+				A81701F4285080D90034D102 /* Encryption.swift */,
 			);
-			path = EncryptionUseCases;
+			path = Encryption;
+			sourceTree = "<group>";
+		};
+		A81701ED28506B050034D102 /* RSAHelper */ = {
+			isa = PBXGroup;
+			children = (
+				A81701F2285073BF0034D102 /* RSAHelper.swift */,
+			);
+			path = RSAHelper;
+			sourceTree = "<group>";
+		};
+		A81701EE28506B0F0034D102 /* AESHelper */ = {
+			isa = PBXGroup;
+			children = (
+				A8127D2F28473AF3001E625E /* AESHelper.swift */,
+			);
+			path = AESHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,15 +373,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A81701F3285073BF0034D102 /* RSAHelper.swift in Sources */,
 				027E3F5628375A3800F17ABA /* MainViewController.swift in Sources */,
 				027E3F6028375E7900F17ABA /* Data + Extension.swift in Sources */,
+				A81701F5285080D90034D102 /* Encryption.swift in Sources */,
 				027E3F67283771A600F17ABA /* UserModel.swift in Sources */,
 				A82929152841F14E0012ECF5 /* UITopAlignedLabel.swift in Sources */,
 				027E3F6228375EDF00F17ABA /* String + Extension.swift in Sources */,
-				A82929172841FBF10012ECF5 /* RSAHelper.swift in Sources */,
 				027E3F26283759FB00F17ABA /* AppDelegate.swift in Sources */,
 				A80184CA283B6BE60001BD68 /* Constants.swift in Sources */,
-				A8127D3228474BAA001E625E /* EncryptionKey.swift in Sources */,
+				A81DEF0F2855EE02008B2D38 /* MainView.swift in Sources */,
 				027E3F28283759FB00F17ABA /* SceneDelegate.swift in Sources */,
 				027E3F642837716000F17ABA /* Encodable + Extension.swift in Sources */,
 				027E3F5D28375C2000F17ABA /* UserMockData.swift in Sources */,
