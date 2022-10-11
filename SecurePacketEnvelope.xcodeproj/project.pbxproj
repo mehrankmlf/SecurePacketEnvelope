@@ -16,18 +16,20 @@
 		027E3F49283759FC00F17ABA /* SecurePacketEnvelopeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E3F48283759FC00F17ABA /* SecurePacketEnvelopeUITestsLaunchTests.swift */; };
 		027E3F5628375A3800F17ABA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E3F5528375A3800F17ABA /* MainViewController.swift */; };
 		027E3F5D28375C2000F17ABA /* UserMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E3F5C28375C2000F17ABA /* UserMockData.swift */; };
-		027E3F6028375E7900F17ABA /* Data + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E3F5F28375E7900F17ABA /* Data + Extension.swift */; };
-		027E3F6228375EDF00F17ABA /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E3F6128375EDF00F17ABA /* String + Extension.swift */; };
 		027E3F642837716000F17ABA /* Encodable + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E3F632837716000F17ABA /* Encodable + Extension.swift */; };
 		027E3F67283771A600F17ABA /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027E3F66283771A600F17ABA /* UserModel.swift */; };
 		A80184C7283B6B4E0001BD68 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80184C6283B6B4E0001BD68 /* MainViewModel.swift */; };
 		A80184CA283B6BE60001BD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80184C9283B6BE60001BD68 /* Constants.swift */; };
 		A80184CC283B6FFE0001BD68 /* Extension + TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80184CB283B6FFE0001BD68 /* Extension + TextField.swift */; };
-		A8127D3028473AF3001E625E /* AESHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8127D2F28473AF3001E625E /* AESHelper.swift */; };
+		A80BA4F928573784005D84F2 /* AESHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80BA4F828573784005D84F2 /* AESHelper.swift */; };
 		A81701F3285073BF0034D102 /* RSAHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81701F2285073BF0034D102 /* RSAHelper.swift */; };
-		A81701F5285080D90034D102 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81701F4285080D90034D102 /* Encryption.swift */; };
 		A81DEF0F2855EE02008B2D38 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81DEF0E2855EE02008B2D38 /* MainView.swift */; };
 		A82929152841F14E0012ECF5 /* UITopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */; };
+		A844DD0728DAF3A9008873F8 /* RequestJsonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A844DD0628DAF3A9008873F8 /* RequestJsonModel.swift */; };
+		A873723128E1914B00EEADD1 /* RequestSecureEnvelop.swift in Sources */ = {isa = PBXBuildFile; fileRef = A873723028E1914B00EEADD1 /* RequestSecureEnvelop.swift */; };
+		A8AB7BCA28D843F6005AB00B /* CryptoKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AB7BC928D843F6005AB00B /* CryptoKeyGenerator.swift */; };
+		A8F029D828DC300800E0ECD2 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F029D728DC300800E0ECD2 /* DetailView.swift */; };
+		A8F029DA28DC3DEC00E0ECD2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F029D928DC3DEC00E0ECD2 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,18 +63,20 @@
 		027E3F48283759FC00F17ABA /* SecurePacketEnvelopeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurePacketEnvelopeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		027E3F5528375A3800F17ABA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		027E3F5C28375C2000F17ABA /* UserMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMockData.swift; sourceTree = "<group>"; };
-		027E3F5F28375E7900F17ABA /* Data + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Extension.swift"; sourceTree = "<group>"; };
-		027E3F6128375EDF00F17ABA /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 		027E3F632837716000F17ABA /* Encodable + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable + Extension.swift"; sourceTree = "<group>"; };
 		027E3F66283771A600F17ABA /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		A80184C6283B6B4E0001BD68 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A80184C9283B6BE60001BD68 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A80184CB283B6FFE0001BD68 /* Extension + TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + TextField.swift"; sourceTree = "<group>"; };
-		A8127D2F28473AF3001E625E /* AESHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESHelper.swift; sourceTree = "<group>"; };
+		A80BA4F828573784005D84F2 /* AESHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESHelper.swift; sourceTree = "<group>"; };
 		A81701F2285073BF0034D102 /* RSAHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAHelper.swift; sourceTree = "<group>"; };
-		A81701F4285080D90034D102 /* Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryption.swift; sourceTree = "<group>"; };
 		A81DEF0E2855EE02008B2D38 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITopAlignedLabel.swift; sourceTree = "<group>"; };
+		A844DD0628DAF3A9008873F8 /* RequestJsonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestJsonModel.swift; sourceTree = "<group>"; };
+		A873723028E1914B00EEADD1 /* RequestSecureEnvelop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSecureEnvelop.swift; sourceTree = "<group>"; };
+		A8AB7BC928D843F6005AB00B /* CryptoKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKeyGenerator.swift; sourceTree = "<group>"; };
+		A8F029D728DC300800E0ECD2 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		A8F029D928DC3DEC00E0ECD2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				027E3F5928375A5B00F17ABA /* Main */,
+				A8F029D628DC2F8D00E0ECD2 /* Detail(Server) */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,8 +189,6 @@
 		027E3F5E28375E6600F17ABA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				027E3F5F28375E7900F17ABA /* Data + Extension.swift */,
-				027E3F6128375EDF00F17ABA /* String + Extension.swift */,
 				027E3F632837716000F17ABA /* Encodable + Extension.swift */,
 				A80184CB283B6FFE0001BD68 /* Extension + TextField.swift */,
 			);
@@ -197,6 +200,8 @@
 			children = (
 				027E3F66283771A600F17ABA /* UserModel.swift */,
 				027E3F5C28375C2000F17ABA /* UserMockData.swift */,
+				A844DD0628DAF3A9008873F8 /* RequestJsonModel.swift */,
+				A873723028E1914B00EEADD1 /* RequestSecureEnvelop.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -220,9 +225,9 @@
 		A8127D2C284738D1001E625E /* Encryption */ = {
 			isa = PBXGroup;
 			children = (
+				A87D996C28D99AA4005EFA4C /* CryptoKeyGenerator */,
 				A81701EE28506B0F0034D102 /* AESHelper */,
 				A81701ED28506B050034D102 /* RSAHelper */,
-				A81701F4285080D90034D102 /* Encryption.swift */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
@@ -238,9 +243,26 @@
 		A81701EE28506B0F0034D102 /* AESHelper */ = {
 			isa = PBXGroup;
 			children = (
-				A8127D2F28473AF3001E625E /* AESHelper.swift */,
+				A80BA4F828573784005D84F2 /* AESHelper.swift */,
 			);
 			path = AESHelper;
+			sourceTree = "<group>";
+		};
+		A87D996C28D99AA4005EFA4C /* CryptoKeyGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				A8AB7BC928D843F6005AB00B /* CryptoKeyGenerator.swift */,
+			);
+			path = CryptoKeyGenerator;
+			sourceTree = "<group>";
+		};
+		A8F029D628DC2F8D00E0ECD2 /* Detail(Server) */ = {
+			isa = PBXGroup;
+			children = (
+				A8F029D728DC300800E0ECD2 /* DetailView.swift */,
+				A8F029D928DC3DEC00E0ECD2 /* DetailViewController.swift */,
+			);
+			path = "Detail(Server)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,21 +395,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A873723128E1914B00EEADD1 /* RequestSecureEnvelop.swift in Sources */,
 				A81701F3285073BF0034D102 /* RSAHelper.swift in Sources */,
+				A8F029DA28DC3DEC00E0ECD2 /* DetailViewController.swift in Sources */,
 				027E3F5628375A3800F17ABA /* MainViewController.swift in Sources */,
-				027E3F6028375E7900F17ABA /* Data + Extension.swift in Sources */,
-				A81701F5285080D90034D102 /* Encryption.swift in Sources */,
+				A80BA4F928573784005D84F2 /* AESHelper.swift in Sources */,
 				027E3F67283771A600F17ABA /* UserModel.swift in Sources */,
 				A82929152841F14E0012ECF5 /* UITopAlignedLabel.swift in Sources */,
-				027E3F6228375EDF00F17ABA /* String + Extension.swift in Sources */,
 				027E3F26283759FB00F17ABA /* AppDelegate.swift in Sources */,
 				A80184CA283B6BE60001BD68 /* Constants.swift in Sources */,
 				A81DEF0F2855EE02008B2D38 /* MainView.swift in Sources */,
 				027E3F28283759FB00F17ABA /* SceneDelegate.swift in Sources */,
 				027E3F642837716000F17ABA /* Encodable + Extension.swift in Sources */,
+				A8F029D828DC300800E0ECD2 /* DetailView.swift in Sources */,
+				A8AB7BCA28D843F6005AB00B /* CryptoKeyGenerator.swift in Sources */,
+				A844DD0728DAF3A9008873F8 /* RequestJsonModel.swift in Sources */,
 				027E3F5D28375C2000F17ABA /* UserMockData.swift in Sources */,
 				A80184C7283B6B4E0001BD68 /* MainViewModel.swift in Sources */,
-				A8127D3028473AF3001E625E /* AESHelper.swift in Sources */,
 				A80184CC283B6FFE0001BD68 /* Extension + TextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,8 +586,8 @@
 				INFOPLIST_FILE = SecurePacketEnvelope/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -571,6 +595,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gravityapp.SecurePacketEnvelope;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -589,8 +616,8 @@
 				INFOPLIST_FILE = SecurePacketEnvelope/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -598,6 +625,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gravityapp.SecurePacketEnvelope;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

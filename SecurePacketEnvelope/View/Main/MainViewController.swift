@@ -8,16 +8,15 @@
 import UIKit
 import Combine
 
-class MainViewController: UIViewController {
-
-    var aesHelper : AESHelper?
+final class MainViewController: UIViewController {
+    
     var viewModel : MainViewModel?
     var contentView : MainView?
     var bag = Set<AnyCancellable>()
     
-    init(viewModel : MainViewModel, contentView : MainView, aesHelper : AESHelper) {
+    init(viewModel : MainViewModel,
+         contentView : MainView){
         self.viewModel = viewModel
-        self.aesHelper = aesHelper
         self.contentView = contentView
         super.init(nibName: nil, bundle: nil)
     }
@@ -33,9 +32,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Color.backGroundColor
-        bindViewModel()
+        self.bindViewModel()
         self.setUpTargets()
-        self.generateRSAKeypairs()
     }
     
     private func setUpTargets() {
@@ -43,25 +41,12 @@ class MainViewController: UIViewController {
                                            , for: UIControl.Event.editingChanged)
         contentView?.txtEmail.addTarget(self, action: #selector(txtEmail_EditingChanged)
                                         , for: UIControl.Event.editingChanged)
-        contentView?.btnEncrypt.addTarget(self, action: #selector(encryptAction), for: .touchUpInside)
-    }
-    
-    private func generateRSAKeypairs() {
-        kRSASwiftGeneratorApplicationTag = "securePacketEnvelope" //setup your id for keychain saving
-        kRSASwiftGeneratorKeySize = 1024 //keySize
-    // generade new key pair
-        RSAHelper.shared.createSecureKeyPair() { (succes,error) in
-            if succes {
-                self.contentView?.lblRSAKey.textColor = Color.greenTextColor
-            }else{
-                self.contentView?.lblRSAKey.textColor = Color.redTextColor
-                self.contentView?.lblRSAKey.alpha = 0.5
-            }
-        }
+        contentView?.btnEncrypt.addTarget(self, action: #selector(encryptAction)
+                                          , for: .touchUpInside)
     }
     
     @objc func encryptAction() {
-        self.createSecruePacketEnvelope()
+        self.encryptAndPushToServerVC()
     }
     
     @objc func txtFullName_EditingChanged(textField: UITextField) {
@@ -71,32 +56,45 @@ class MainViewController: UIViewController {
     @objc func txtEmail_EditingChanged(textField: UITextField) {
         self.viewModel?.email = textField.text ?? ""
     }
-
-    private func createSecruePacketEnvelope() {
+    
+    private func jsonModel() -> String {
         let userData = UserModel.init(name: self.contentView?.txtFullName.text,
                                       familyName: self.contentView?.txtEmail.text,
                                       age: Int(self.contentView?.txtAge.text ?? ""))
-        
-        // generate IV and sercret Key for AES Data encryption.
-        guard let iv = aesHelper?.generateIV(), let secret = aesHelper?.genereteSecret() else {return}
-        // encrypt userData with AES.
-        let encryptData = userData.convertToString?.aesEncrypt(key: secret, iv: iv)
-        self.contentView?.lblEncrypted.text = encryptData
-        //ecrypt secret key with RSA.
-//        RSAHelper.shared.encryptMessageWithPublicKey(secret) { success,data,error in
-//            print(success)
-//            print(data)
-//            print(error)
-//        }
-        
-//        RSAHelper.shared.decryptMessageWithPrivateKey(<#T##encryptedData: Data##Data#>, completion: <#T##(Bool, String?, CryptoException?) -> Void##(Bool, String?, CryptoException?) -> Void##(_ success: Bool, _ result: String?, _ error: CryptoException?) -> Void#>)
-//
-//        let encRSA = MZRSA.encryptString(secret, publicKey: EncryptionKey.publicKey.key)!
-//        print(encRSA)
-//        let decRSA = MZRSA.decryptString(encRSA, privateKey: EncryptionKey.privateKey.key)!
-//        print(decRSA)
+        return userData.convertToString ?? ""
     }
     
+    private func createSecruePacketEnvelope() -> (String, String, String) {
+        // generate IV and sercret Key for AES Data encryption.
+        let aes : AESHelper = CryptoKeyGenerator.generateAESKeys()!
+        // encrypt converted string json with AES128 algorithm.
+        let encryptedAES : String = aes.aesEncrypt(data: self.jsonModel())!
+        // encrypt AES key with RSA
+        
+        // generate RSA keypair.
+        let rsa : RSAKeyPair = CryptoKeyGenerator.generateRSAKeyPair()!
+        // fetch RSA public key
+        let rsaPublicKey: RSAPublicKey = rsa.fetchPublicKey()
+        // encrypt AES secret key with RSA.
+        print(aes.key)
+        let encryptedRSA : String = rsaPublicKey.encryptBase64(text: aes.key)!
+        // retrun encrypted data
+        return (encryptedAES, encryptedRSA, aes.iv)
+    }
+    
+    private func createSecureWalletEnvelop() -> RequestSecureEnvelop {
+        let (data, key, iv) = createSecruePacketEnvelope()
+        return RequestSecureEnvelop(encryptedData: data, encryptedKey: key, iv: iv)
+    }
+    
+    private func encryptAndPushToServerVC() {
+        let vc = DetailViewController(contentView: DetailView())
+        vc.data = self.createSecureWalletEnvelop()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension MainViewController {
     private func bindViewModel() {
         viewModel?.fullNameMessagePublisher
             .receive(on: RunLoop.main)
@@ -126,24 +124,6 @@ class MainViewController: UIViewController {
                 self.contentView?.btnEncrypt.isEnabled = false
             })
             .store(in: &bag)
-    }
-
-     func EncryptRSAFromData(data : String, publicKey: SecKey) -> Data? {
-        
-        let error:UnsafeMutablePointer<Unmanaged<CFError>?>? = nil
-        let plainData = data.data(using: .utf8)
-        
-        if let encryptedMessageData:Data = SecKeyCreateEncryptedData(publicKey, .rsaEncryptionOAEPSHA256, plainData! as CFData,error) as Data? {
- 
-            let data = encryptedMessageData
-            
-            return data
-        }
-        else{
-            print("RSA Error encrypting")
-        }
-        
-        return nil
     }
 }
 

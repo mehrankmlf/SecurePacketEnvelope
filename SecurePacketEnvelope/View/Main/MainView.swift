@@ -8,25 +8,16 @@
 import UIKit
 
 class MainView: UIView {
-
-     var viewContainer : UIView = {
+    
+    private var safeArea: UILayoutGuide!
+    
+    var viewContainer : UIView = {
         let viewContainer = UIView()
         viewContainer.backgroundColor = .white
         return viewContainer
     }()
     
-     lazy var lblRSAKey : UILabel = {
-        let lblRSAKey = UILabel()
-        lblRSAKey.text = "RSAKeyGenerated"
-        lblRSAKey.textAlignment = .right
-        lblRSAKey.textColor = Color.fontTextColor
-        lblRSAKey.font = UIFont.boldSystemFont(ofSize: 15)
-        lblRSAKey.translatesAutoresizingMaskIntoConstraints = false
-        return lblRSAKey
-    }()
-    
-    
-     lazy var lblTitle : UILabel = {
+    lazy var lblTitle : UILabel = {
         let lblTop = UILabel()
         lblTop.text = "Enter Your Data"
         lblTop.textColor = Color.fontTextColor
@@ -35,7 +26,7 @@ class MainView: UIView {
         return lblTop
     }()
     
-     lazy var lblFullName : UILabel = {
+    lazy var lblFullName : UILabel = {
         let lblTop = UILabel()
         lblTop.text = "Full Name"
         lblTop.textColor = Color.fontTextColor
@@ -44,7 +35,7 @@ class MainView: UIView {
         return lblTop
     }()
     
-     lazy var lblEmail : UILabel = {
+    lazy var lblEmail : UILabel = {
         let lblTop = UILabel()
         lblTop.text = "Email"
         lblTop.textColor = Color.fontTextColor
@@ -53,7 +44,7 @@ class MainView: UIView {
         return lblTop
     }()
     
-     lazy var lblAge : UILabel = {
+    lazy var lblAge : UILabel = {
         let lblAge = UILabel()
         lblAge.text = "Age"
         lblAge.textColor = Color.fontTextColor
@@ -62,7 +53,7 @@ class MainView: UIView {
         return lblAge
     }()
     
-     lazy var txtFullName : UITextField = {
+    lazy var txtFullName : UITextField = {
         let txtFullName = UITextField()
         txtFullName.textColor = UIColor.gray
         txtFullName.borderStyle = .line
@@ -71,7 +62,7 @@ class MainView: UIView {
         return txtFullName
     }()
     
-     lazy var txtEmail : UITextField = {
+    lazy var txtEmail : UITextField = {
         let txtEmail = UITextField()
         txtEmail.textColor = UIColor.gray
         txtEmail.borderStyle = .line
@@ -80,7 +71,7 @@ class MainView: UIView {
         return txtEmail
     }()
     
-     lazy var txtAge : UITextField = {
+    lazy var txtAge : UITextField = {
         let txtAge = UITextField()
         txtAge.textColor = UIColor.gray
         txtAge.borderStyle = .line
@@ -90,20 +81,7 @@ class MainView: UIView {
         return txtAge
     }()
     
-     lazy var lblEncrypted : UITopAlignedLabel = {
-        let lblEncrypted = UITopAlignedLabel()
-        lblEncrypted.text = ""
-        lblEncrypted.textColor = Color.fontTextColor
-        lblEncrypted.layer.borderWidth = 1
-        lblEncrypted.layer.borderColor = UIColor.gray.cgColor
-        lblEncrypted.numberOfLines = 0
-        lblEncrypted.font = UIFont.boldSystemFont(ofSize: 15)
-        lblEncrypted.translatesAutoresizingMaskIntoConstraints = false
-        return lblEncrypted
-    }()
-    
-    
-     lazy var statsView: UIStackView = {
+    lazy var statsView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [lblFullName,
                                                        txtFullName,
                                                        lblEmail,
@@ -118,7 +96,7 @@ class MainView: UIView {
         return stackView
     }()
     
-     lazy var btnEncrypt : UIButton = {
+    lazy var btnEncrypt : UIButton = {
         let btnSubmit = UIButton()
         btnSubmit.setTitle("Create Secure Envelope", for: .normal)
         btnSubmit.backgroundColor = Color.buttonBackgroundColor
@@ -131,10 +109,9 @@ class MainView: UIView {
     
     init() {
         super.init(frame: .zero)
-        
+        setupUI()
         addSubviews()
         makeAutolayout()
-        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -142,12 +119,9 @@ class MainView: UIView {
     }
     
     private func addSubviews() {
-        let elements = [viewContainer,
-                        lblRSAKey,
-                        lblTitle,
+        let elements = [lblTitle,
                         statsView,
-                        btnEncrypt,
-                        lblEncrypted]
+                        btnEncrypt]
         for element in elements {
             addSubview(element)
         }
@@ -155,35 +129,25 @@ class MainView: UIView {
     
     private func setupUI() {
         backgroundColor = Color.backGroundColor
+        safeArea = self.safeAreaLayoutGuide
     }
 }
-
 
 extension MainView {
     private func makeAutolayout() {
         
-        lblRSAKey.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        lblRSAKey.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 30).isActive = true
-        lblRSAKey.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        lblRSAKey.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
-        
-        lblTitle.topAnchor.constraint(equalTo: lblRSAKey.bottomAnchor, constant: 20).isActive = true
-        lblTitle.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 30).isActive = true
-        lblTitle.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -30).isActive = true
+        lblTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20).isActive = true
+        lblTitle.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 30).isActive = true
+        lblTitle.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -30).isActive = true
         lblTitle.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
         
         statsView.topAnchor.constraint(equalTo: lblTitle.bottomAnchor, constant: 20).isActive = true
-        statsView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 30).isActive = true
-        statsView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -30).isActive = true
+        statsView.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 30).isActive = true
+        statsView.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -30).isActive = true
         
         btnEncrypt.topAnchor.constraint(equalTo: statsView.bottomAnchor, constant: 30).isActive = true
         btnEncrypt.leadingAnchor.constraint(equalTo: statsView.leadingAnchor).isActive = true
         btnEncrypt.trailingAnchor.constraint(equalTo: statsView.trailingAnchor).isActive = true
         btnEncrypt.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        lblEncrypted.topAnchor.constraint(equalTo: btnEncrypt.bottomAnchor, constant: 30).isActive = true
-        lblEncrypted.leadingAnchor.constraint(equalTo: btnEncrypt.leadingAnchor).isActive = true
-        lblEncrypted.trailingAnchor.constraint(equalTo: btnEncrypt.trailingAnchor).isActive = true
-        lblEncrypted.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
 }
