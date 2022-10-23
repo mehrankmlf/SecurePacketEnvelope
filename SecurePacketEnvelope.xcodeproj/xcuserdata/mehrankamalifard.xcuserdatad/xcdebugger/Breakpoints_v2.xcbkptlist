@@ -20,14 +20,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "7EBFB94F-8815-48BC-AFCA-E7309E6ED780 - 1c1f64f8d1893ef9"
+                  uuid = "7EBFB94F-8815-48BC-AFCA-E7309E6ED780 - a26bcffeceb424e8"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "SecurePacketEnvelope.AESHelper.aesDecrypt(data: Swift.String, key: Swift.String, iv: Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt;"
                   moduleName = "SecurePacketEnvelope"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mehrankamalifard/Desktop/SecurePacketEnvelope/SecurePacketEnvelope/Classes/Encryption/AESHelper/AESHelper.swift"
+                  urlString = "file:///Users/mehrankamalifard/Desktop/Packeeet/SecurePacketEnvelope/SecurePacketEnvelope/Classes/Encryption/AESHelper/AESHelper.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "43"
@@ -35,14 +35,14 @@
                   offsetFromSymbolStart = "228">
                </Location>
                <Location
-                  uuid = "7EBFB94F-8815-48BC-AFCA-E7309E6ED780 - 1c1f64f8d1893ef9"
+                  uuid = "7EBFB94F-8815-48BC-AFCA-E7309E6ED780 - a26bcffeceb424e8"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "SecurePacketEnvelope.AESHelper.aesDecrypt(data: Swift.String, key: Swift.String, iv: Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt;"
                   moduleName = "SecurePacketEnvelope"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mehrankamalifard/Desktop/SecurePacketEnvelope/SecurePacketEnvelope/Classes/Encryption/AESHelper/AESHelper.swift"
+                  urlString = "file:///Users/mehrankamalifard/Desktop/Packeeet/SecurePacketEnvelope/SecurePacketEnvelope/Classes/Encryption/AESHelper/AESHelper.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "43"
@@ -103,22 +103,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DBBDFB4F-FA76-4E6C-BCBF-ABB05B7D43CE"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SecurePacketEnvelope/Classes/Encryption/CryptoKeyGenerator/CryptoKeyGenerator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "generateRSAKeyPair()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "828A36EC-C30F-467D-B488-AE5947EB0268"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -129,38 +113,6 @@
             startingLineNumber = "63"
             endingLineNumber = "63"
             landmarkName = "encryptBase64(text:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "ED200723-5481-40EB-809A-808362E0799F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SecurePacketEnvelope/View/Main/MainViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "createSecruePacketEnvelope()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DA0D3F6D-4EE8-4DB6-AAA3-EF61B4D15A89"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SecurePacketEnvelope/View/Main/MainViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "createSecureWalletEnvelop()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

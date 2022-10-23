@@ -15,7 +15,7 @@ enum RSAConfig {
     static let rsaAlgorithm: SecKeyAlgorithm = .rsaEncryptionPKCS1
 }
 
-struct RSAKeyPair {
+struct RSAKeyPair : RSAHelperProtocol {
     
     var privateKey: SecKey?
     var publicKey: SecKey?
@@ -29,7 +29,6 @@ struct RSAKeyPair {
     func decpryptBase64(encrpted: String) -> String? {
         
         guard let privateKey = CryptoKeyGenerator.getPrivateKey() else {return nil}
-        
         let data = NSData(base64Encoded: encrpted, options: .ignoreUnknownCharacters)!
         var error: Unmanaged<CFError>?
         if let decryptedData: Data = SecKeyCreateDecryptedData(privateKey, RSAConfig.rsaAlgorithm, data as CFData, &error) as? Data {
@@ -43,12 +42,13 @@ struct RSAKeyPair {
         }
     }
     
-    func fetchPublicKey() -> RSAPublicKey {
-        return RSAPublicKey(publicKey: self.publicKey!)
+    func fetchPublicKey() -> RSAPublicKey? {
+        guard let pubKey = self.publicKey else {return nil}
+        return RSAPublicKey(publicKey: pubKey)
     }
 }
 
-struct RSAPublicKey {
+struct RSAPublicKey : RSAPublicKeyProtocol {
     
     var publicKey : SecKey?
     

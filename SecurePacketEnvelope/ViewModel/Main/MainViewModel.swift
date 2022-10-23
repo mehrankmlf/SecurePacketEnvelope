@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class MainViewModel {
+final class MainViewModel {
     
     @Published var fullName : String = ""
     @Published var email : String = ""

@@ -26,6 +26,10 @@
 		A81DEF0F2855EE02008B2D38 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81DEF0E2855EE02008B2D38 /* MainView.swift */; };
 		A82929152841F14E0012ECF5 /* UITopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */; };
 		A844DD0728DAF3A9008873F8 /* RequestJsonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A844DD0628DAF3A9008873F8 /* RequestJsonModel.swift */; };
+		A84A017328FE742F00E8F8B2 /* RSAHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84A017228FE742F00E8F8B2 /* RSAHelperProtocol.swift */; };
+		A84A017628FE755800E8F8B2 /* MockRSAHelperFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84A017528FE755800E8F8B2 /* MockRSAHelperFactory.swift */; };
+		A84A017828FE794C00E8F8B2 /* MockRSAPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84A017728FE794C00E8F8B2 /* MockRSAPublicKey.swift */; };
+		A84A017B28FE7D3E00E8F8B2 /* RSATest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84A017A28FE7D3E00E8F8B2 /* RSATest.swift */; };
 		A873723128E1914B00EEADD1 /* RequestSecureEnvelop.swift in Sources */ = {isa = PBXBuildFile; fileRef = A873723028E1914B00EEADD1 /* RequestSecureEnvelop.swift */; };
 		A8AB7BCA28D843F6005AB00B /* CryptoKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AB7BC928D843F6005AB00B /* CryptoKeyGenerator.swift */; };
 		A8F029D828DC300800E0ECD2 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F029D728DC300800E0ECD2 /* DetailView.swift */; };
@@ -73,6 +77,10 @@
 		A81DEF0E2855EE02008B2D38 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITopAlignedLabel.swift; sourceTree = "<group>"; };
 		A844DD0628DAF3A9008873F8 /* RequestJsonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestJsonModel.swift; sourceTree = "<group>"; };
+		A84A017228FE742F00E8F8B2 /* RSAHelperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAHelperProtocol.swift; sourceTree = "<group>"; };
+		A84A017528FE755800E8F8B2 /* MockRSAHelperFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRSAHelperFactory.swift; sourceTree = "<group>"; };
+		A84A017728FE794C00E8F8B2 /* MockRSAPublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRSAPublicKey.swift; sourceTree = "<group>"; };
+		A84A017A28FE7D3E00E8F8B2 /* RSATest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSATest.swift; sourceTree = "<group>"; };
 		A873723028E1914B00EEADD1 /* RequestSecureEnvelop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSecureEnvelop.swift; sourceTree = "<group>"; };
 		A8AB7BC928D843F6005AB00B /* CryptoKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKeyGenerator.swift; sourceTree = "<group>"; };
 		A8F029D728DC300800E0ECD2 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -143,6 +151,8 @@
 		027E3F3B283759FC00F17ABA /* SecurePacketEnvelopeTests */ = {
 			isa = PBXGroup;
 			children = (
+				A84A017928FE7D1F00E8F8B2 /* RSATest */,
+				A84A017428FE753F00E8F8B2 /* Mock */,
 				027E3F3C283759FC00F17ABA /* SecurePacketEnvelopeTests.swift */,
 			);
 			path = SecurePacketEnvelopeTests;
@@ -235,6 +245,7 @@
 		A81701ED28506B050034D102 /* RSAHelper */ = {
 			isa = PBXGroup;
 			children = (
+				A84A017228FE742F00E8F8B2 /* RSAHelperProtocol.swift */,
 				A81701F2285073BF0034D102 /* RSAHelper.swift */,
 			);
 			path = RSAHelper;
@@ -246,6 +257,23 @@
 				A80BA4F828573784005D84F2 /* AESHelper.swift */,
 			);
 			path = AESHelper;
+			sourceTree = "<group>";
+		};
+		A84A017428FE753F00E8F8B2 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				A84A017728FE794C00E8F8B2 /* MockRSAPublicKey.swift */,
+				A84A017528FE755800E8F8B2 /* MockRSAHelperFactory.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		A84A017928FE7D1F00E8F8B2 /* RSATest */ = {
+			isa = PBXGroup;
+			children = (
+				A84A017A28FE7D3E00E8F8B2 /* RSATest.swift */,
+			);
+			path = RSATest;
 			sourceTree = "<group>";
 		};
 		A87D996C28D99AA4005EFA4C /* CryptoKeyGenerator */ = {
@@ -407,6 +435,7 @@
 				A81DEF0F2855EE02008B2D38 /* MainView.swift in Sources */,
 				027E3F28283759FB00F17ABA /* SceneDelegate.swift in Sources */,
 				027E3F642837716000F17ABA /* Encodable + Extension.swift in Sources */,
+				A84A017328FE742F00E8F8B2 /* RSAHelperProtocol.swift in Sources */,
 				A8F029D828DC300800E0ECD2 /* DetailView.swift in Sources */,
 				A8AB7BCA28D843F6005AB00B /* CryptoKeyGenerator.swift in Sources */,
 				A844DD0728DAF3A9008873F8 /* RequestJsonModel.swift in Sources */,
@@ -420,7 +449,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A84A017828FE794C00E8F8B2 /* MockRSAPublicKey.swift in Sources */,
 				027E3F3D283759FC00F17ABA /* SecurePacketEnvelopeTests.swift in Sources */,
+				A84A017B28FE7D3E00E8F8B2 /* RSATest.swift in Sources */,
+				A84A017628FE755800E8F8B2 /* MockRSAHelperFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

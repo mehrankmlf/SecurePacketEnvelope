@@ -62,7 +62,7 @@ final class MainViewController: UIViewController {
                                       familyName: self.contentView?.txtEmail.text,
                                       age: Int(self.contentView?.txtAge.text ?? ""))
         return userData.convertToString ?? ""
-    }
+    }  
     
     private func createSecruePacketEnvelope() -> (String, String, String) {
         // generate IV and sercret Key for AES Data encryption.
@@ -74,9 +74,8 @@ final class MainViewController: UIViewController {
         // generate RSA keypair.
         let rsa : RSAKeyPair = CryptoKeyGenerator.generateRSAKeyPair()!
         // fetch RSA public key
-        let rsaPublicKey: RSAPublicKey = rsa.fetchPublicKey()
+        let rsaPublicKey: RSAPublicKey = rsa.fetchPublicKey()!
         // encrypt AES secret key with RSA.
-        print(aes.key)
         let encryptedRSA : String = rsaPublicKey.encryptBase64(text: aes.key)!
         // retrun encrypted data
         return (encryptedAES, encryptedRSA, aes.iv)
