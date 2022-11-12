@@ -31,7 +31,7 @@
 		A84A017828FE794C00E8F8B2 /* MockRSAPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84A017728FE794C00E8F8B2 /* MockRSAPublicKey.swift */; };
 		A84A017B28FE7D3E00E8F8B2 /* RSATest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84A017A28FE7D3E00E8F8B2 /* RSATest.swift */; };
 		A873723128E1914B00EEADD1 /* RequestSecureEnvelop.swift in Sources */ = {isa = PBXBuildFile; fileRef = A873723028E1914B00EEADD1 /* RequestSecureEnvelop.swift */; };
-		A8AB7BCA28D843F6005AB00B /* CryptoKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AB7BC928D843F6005AB00B /* CryptoKeyGenerator.swift */; };
+		A8AB7BCA28D843F6005AB00B /* CryptoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AB7BC928D843F6005AB00B /* CryptoKey.swift */; };
 		A8F029D828DC300800E0ECD2 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F029D728DC300800E0ECD2 /* DetailView.swift */; };
 		A8F029DA28DC3DEC00E0ECD2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F029D928DC3DEC00E0ECD2 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -82,7 +82,7 @@
 		A84A017728FE794C00E8F8B2 /* MockRSAPublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRSAPublicKey.swift; sourceTree = "<group>"; };
 		A84A017A28FE7D3E00E8F8B2 /* RSATest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSATest.swift; sourceTree = "<group>"; };
 		A873723028E1914B00EEADD1 /* RequestSecureEnvelop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSecureEnvelop.swift; sourceTree = "<group>"; };
-		A8AB7BC928D843F6005AB00B /* CryptoKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKeyGenerator.swift; sourceTree = "<group>"; };
+		A8AB7BC928D843F6005AB00B /* CryptoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKey.swift; sourceTree = "<group>"; };
 		A8F029D728DC300800E0ECD2 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		A8F029D928DC3DEC00E0ECD2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,7 +179,7 @@
 		027E3F5828375A4F00F17ABA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A8127D2C284738D1001E625E /* Encryption */,
+				A8127D2C284738D1001E625E /* Cryptography */,
 				027E3F5E28375E6600F17ABA /* Extensions */,
 				A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */,
 				A80184C9283B6BE60001BD68 /* Constants.swift */,
@@ -232,14 +232,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		A8127D2C284738D1001E625E /* Encryption */ = {
+		A8127D2C284738D1001E625E /* Cryptography */ = {
 			isa = PBXGroup;
 			children = (
-				A87D996C28D99AA4005EFA4C /* CryptoKeyGenerator */,
+				A87D996C28D99AA4005EFA4C /* CryptoKey */,
 				A81701EE28506B0F0034D102 /* AESHelper */,
 				A81701ED28506B050034D102 /* RSAHelper */,
 			);
-			path = Encryption;
+			path = Cryptography;
 			sourceTree = "<group>";
 		};
 		A81701ED28506B050034D102 /* RSAHelper */ = {
@@ -276,12 +276,12 @@
 			path = RSATest;
 			sourceTree = "<group>";
 		};
-		A87D996C28D99AA4005EFA4C /* CryptoKeyGenerator */ = {
+		A87D996C28D99AA4005EFA4C /* CryptoKey */ = {
 			isa = PBXGroup;
 			children = (
-				A8AB7BC928D843F6005AB00B /* CryptoKeyGenerator.swift */,
+				A8AB7BC928D843F6005AB00B /* CryptoKey.swift */,
 			);
-			path = CryptoKeyGenerator;
+			path = CryptoKey;
 			sourceTree = "<group>";
 		};
 		A8F029D628DC2F8D00E0ECD2 /* Detail(Server) */ = {
@@ -437,7 +437,7 @@
 				027E3F642837716000F17ABA /* Encodable + Extension.swift in Sources */,
 				A84A017328FE742F00E8F8B2 /* RSAHelperProtocol.swift in Sources */,
 				A8F029D828DC300800E0ECD2 /* DetailView.swift in Sources */,
-				A8AB7BCA28D843F6005AB00B /* CryptoKeyGenerator.swift in Sources */,
+				A8AB7BCA28D843F6005AB00B /* CryptoKey.swift in Sources */,
 				A844DD0728DAF3A9008873F8 /* RequestJsonModel.swift in Sources */,
 				027E3F5D28375C2000F17ABA /* UserMockData.swift in Sources */,
 				A80184C7283B6B4E0001BD68 /* MainViewModel.swift in Sources */,

@@ -58,21 +58,21 @@ final class MainViewController: UIViewController {
     }
     
     private func jsonModel() -> String {
-        let userData = UserModel.init(name: self.contentView?.txtFullName.text,
-                                      familyName: self.contentView?.txtEmail.text,
+        let userData = UserModel.init(fullName: self.contentView?.txtFullName.text,
+                                      email: self.contentView?.txtEmail.text,
                                       age: Int(self.contentView?.txtAge.text ?? ""))
         return userData.convertToString ?? ""
     }  
     
     private func createSecruePacketEnvelope() -> (String, String, String) {
         // generate IV and sercret Key for AES Data encryption.
-        let aes : AESHelper = CryptoKeyGenerator.generateAESKeys()!
+        let aes : AESHelper = AESKeyManager.generateAESKeys()!
         // encrypt converted string json with AES128 algorithm.
         let encryptedAES : String = aes.aesEncrypt(data: self.jsonModel())!
         // encrypt AES key with RSA
         
         // generate RSA keypair.
-        let rsa : RSAKeyPair = CryptoKeyGenerator.generateRSAKeyPair()!
+        let rsa : RSAKeyPair = try! RSAKeyManager.generateRSAKeyPair()
         // fetch RSA public key
         let rsaPublicKey: RSAPublicKey = rsa.fetchPublicKey()!
         // encrypt AES secret key with RSA.

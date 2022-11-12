@@ -23,7 +23,7 @@ public enum CryptoException: Error {
     case outOfMemory
 }
 
-struct CryptoKeyGenerator {
+struct AESKeyManager {
     // generate and set AES random IV and random KEY string
     static func generateAESKeys() -> AESHelper? {
         func generateRandomString(length: Int) -> String {
@@ -32,10 +32,13 @@ struct CryptoKeyGenerator {
         }
         return AESHelper(iv: generateRandomString(length: 16), key: generateRandomString(length: 16))
     }
+}
+
+struct RSAKeyManager {
     
     //MARK: - generate RSA keypair
-    static func generateRSAKeyPair() -> RSAKeyPair? {
-
+    static func generateRSAKeyPair() throws -> RSAKeyPair {
+        
         // private key parameters
         let privateKeyParams: [String: AnyObject] = [
             kSecAttrIsPermanent as String: true as AnyObject,
@@ -54,7 +57,7 @@ struct CryptoKeyGenerator {
             kSecAttrKeySizeInBits as String:    RSAConfig.keySize as AnyObject,
             kSecPublicKeyAttrs as String:       publicKeyParams as AnyObject,
             kSecPrivateKeyAttrs as String:      privateKeyParams as AnyObject,
-            ]
+        ]
         
         // check status after Key generation
         var pubKey, privKey: SecKey?
@@ -68,8 +71,8 @@ struct CryptoKeyGenerator {
             case errSecAuthFailed: error = .authFailed
             default: break
             }
+            throw error
         }
-        
         return RSAKeyPair(privateKey: privKey, publicKey: pubKey)
     }
     
@@ -81,7 +84,7 @@ struct CryptoKeyGenerator {
             kSecAttrApplicationTag as String: RSAConfig.kRSAApplicationTag,
             kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
             kSecReturnRef as String: true,
-            ] as [String : Any]
+        ] as [String : Any]
         var ref: AnyObject?
         let status = SecItemCopyMatching(parameters as CFDictionary, &ref)
         if status == errSecSuccess { return ref as! SecKey? } else { return nil }
@@ -94,7 +97,7 @@ struct CryptoKeyGenerator {
             kSecAttrKeyClass as String: kSecAttrKeyClassPrivate,
             kSecAttrApplicationTag as String: RSAConfig.kRSAApplicationTag ,
             kSecReturnRef as String: true,
-            ] as [String : Any]
+        ] as [String : Any]
         var ref: AnyObject?
         let status = SecItemCopyMatching(parameters as CFDictionary, &ref)
         if status == errSecSuccess { return ref as! SecKey? } else { return nil }

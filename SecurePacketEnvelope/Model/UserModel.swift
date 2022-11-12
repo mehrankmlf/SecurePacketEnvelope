@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserModel : Codable {
-    var name : String?
-    var familyName : String?
+    var fullName : String?
+    var email : String?
     var age : Int?
 }

@@ -28,7 +28,7 @@ struct RSAKeyPair : RSAHelperProtocol {
     //MARK: - Decrypt Function
     func decpryptBase64(encrpted: String) -> String? {
         
-        guard let privateKey = CryptoKeyGenerator.getPrivateKey() else {return nil}
+        guard let privateKey = RSAKeyManager.getPrivateKey() else {return nil}
         let data = NSData(base64Encoded: encrpted, options: .ignoreUnknownCharacters)!
         var error: Unmanaged<CFError>?
         if let decryptedData: Data = SecKeyCreateDecryptedData(privateKey, RSAConfig.rsaAlgorithm, data as CFData, &error) as? Data {
@@ -59,7 +59,7 @@ struct RSAPublicKey : RSAPublicKeyProtocol {
     //MARK: - Encrypt Function
     func encryptBase64(text: String) -> String? {
         
-        guard let pubKey = CryptoKeyGenerator.getPublicKey() else {return nil}
+        guard let pubKey = RSAKeyManager.getPublicKey() else {return nil}
         guard let data = text.data(using: String.Encoding.utf8) else {return nil}
         var error: Unmanaged<CFError>?
         if let encryptedData: Data = SecKeyCreateEncryptedData(pubKey, RSAConfig.rsaAlgorithm, data as CFData, &error) as? Data {

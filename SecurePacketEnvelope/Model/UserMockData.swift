@@ -9,6 +9,6 @@ import Foundation
 
 extension UserModel {
     static func fakeData() -> UserModel {
-        return UserModel.init(name: "Mehran", familyName: "Kmlf", age: 29)
+        return UserModel.init(fullName: "Mehran", email: "Kmlf", age: 29)
     }
 }
