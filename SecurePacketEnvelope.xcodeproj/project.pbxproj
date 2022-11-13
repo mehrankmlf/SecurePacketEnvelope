@@ -22,10 +22,10 @@
 		A80184CA283B6BE60001BD68 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80184C9283B6BE60001BD68 /* Constants.swift */; };
 		A80184CC283B6FFE0001BD68 /* Extension + TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80184CB283B6FFE0001BD68 /* Extension + TextField.swift */; };
 		A80BA4F928573784005D84F2 /* AESHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80BA4F828573784005D84F2 /* AESHelper.swift */; };
+		A81656A22920B6710035D35C /* AESConfigProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81656A12920B6710035D35C /* AESConfigProtocol.swift */; };
 		A81701F3285073BF0034D102 /* RSAHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81701F2285073BF0034D102 /* RSAHelper.swift */; };
 		A81DEF0F2855EE02008B2D38 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81DEF0E2855EE02008B2D38 /* MainView.swift */; };
 		A82929152841F14E0012ECF5 /* UITopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */; };
-		A844DD0728DAF3A9008873F8 /* RequestJsonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A844DD0628DAF3A9008873F8 /* RequestJsonModel.swift */; };
 		A84A017328FE742F00E8F8B2 /* RSAHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84A017228FE742F00E8F8B2 /* RSAHelperProtocol.swift */; };
 		A84A017628FE755800E8F8B2 /* MockRSAHelperFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84A017528FE755800E8F8B2 /* MockRSAHelperFactory.swift */; };
 		A84A017828FE794C00E8F8B2 /* MockRSAPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84A017728FE794C00E8F8B2 /* MockRSAPublicKey.swift */; };
@@ -73,10 +73,10 @@
 		A80184C9283B6BE60001BD68 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A80184CB283B6FFE0001BD68 /* Extension + TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + TextField.swift"; sourceTree = "<group>"; };
 		A80BA4F828573784005D84F2 /* AESHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESHelper.swift; sourceTree = "<group>"; };
+		A81656A12920B6710035D35C /* AESConfigProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESConfigProtocol.swift; sourceTree = "<group>"; };
 		A81701F2285073BF0034D102 /* RSAHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAHelper.swift; sourceTree = "<group>"; };
 		A81DEF0E2855EE02008B2D38 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A82929142841F14E0012ECF5 /* UITopAlignedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITopAlignedLabel.swift; sourceTree = "<group>"; };
-		A844DD0628DAF3A9008873F8 /* RequestJsonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestJsonModel.swift; sourceTree = "<group>"; };
 		A84A017228FE742F00E8F8B2 /* RSAHelperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAHelperProtocol.swift; sourceTree = "<group>"; };
 		A84A017528FE755800E8F8B2 /* MockRSAHelperFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRSAHelperFactory.swift; sourceTree = "<group>"; };
 		A84A017728FE794C00E8F8B2 /* MockRSAPublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRSAPublicKey.swift; sourceTree = "<group>"; };
@@ -210,7 +210,6 @@
 			children = (
 				027E3F66283771A600F17ABA /* UserModel.swift */,
 				027E3F5C28375C2000F17ABA /* UserMockData.swift */,
-				A844DD0628DAF3A9008873F8 /* RequestJsonModel.swift */,
 				A873723028E1914B00EEADD1 /* RequestSecureEnvelop.swift */,
 			);
 			path = Model;
@@ -254,6 +253,7 @@
 		A81701EE28506B0F0034D102 /* AESHelper */ = {
 			isa = PBXGroup;
 			children = (
+				A81656A12920B6710035D35C /* AESConfigProtocol.swift */,
 				A80BA4F828573784005D84F2 /* AESHelper.swift */,
 			);
 			path = AESHelper;
@@ -430,6 +430,7 @@
 				A80BA4F928573784005D84F2 /* AESHelper.swift in Sources */,
 				027E3F67283771A600F17ABA /* UserModel.swift in Sources */,
 				A82929152841F14E0012ECF5 /* UITopAlignedLabel.swift in Sources */,
+				A81656A22920B6710035D35C /* AESConfigProtocol.swift in Sources */,
 				027E3F26283759FB00F17ABA /* AppDelegate.swift in Sources */,
 				A80184CA283B6BE60001BD68 /* Constants.swift in Sources */,
 				A81DEF0F2855EE02008B2D38 /* MainView.swift in Sources */,
@@ -438,7 +439,6 @@
 				A84A017328FE742F00E8F8B2 /* RSAHelperProtocol.swift in Sources */,
 				A8F029D828DC300800E0ECD2 /* DetailView.swift in Sources */,
 				A8AB7BCA28D843F6005AB00B /* CryptoKey.swift in Sources */,
-				A844DD0728DAF3A9008873F8 /* RequestJsonModel.swift in Sources */,
 				027E3F5D28375C2000F17ABA /* UserMockData.swift in Sources */,
 				A80184C7283B6B4E0001BD68 /* MainViewModel.swift in Sources */,
 				A80184CC283B6FFE0001BD68 /* Extension + TextField.swift in Sources */,

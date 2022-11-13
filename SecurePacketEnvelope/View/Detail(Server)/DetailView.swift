@@ -9,44 +9,48 @@ import UIKit
 
 class DetailView: UIView {
     
-    private var safeArea: UILayoutGuide!
+    private enum Constants {
+        static let titleFontSize  : CGFloat = 35
+        static let normalFontSize : CGFloat = 15
+        static let border         : CGFloat = 1.0
+        static let cornerRadius   : CGFloat = 10.0
+        static let padding1       : CGFloat = 10.0
+        static let padding2       : CGFloat = 20.0
+        static let generalHeight  : CGFloat = 25.0
+    }
     
-    var viewContainer : UIView = {
-        let viewContainer = UIView()
-        viewContainer.translatesAutoresizingMaskIntoConstraints = false
-        return viewContainer
-    }()
+    private var safeArea: UILayoutGuide!
     
     lazy var lblTitle : UILabel = {
         let label = UILabel()
         label.text = "Decrypt Data"
         label.textAlignment = .left
         label.textColor = Color.fontTextColor
-        label.font = UIFont.boldSystemFont(ofSize: 35)
+        label.font = UIFont.boldSystemFont(ofSize: Constants.titleFontSize)
         return label
     }()
     
     lazy var lblDecrypt : UITopAlignedLabel = {
-       let lblEncrypted = UITopAlignedLabel()
-       lblEncrypted.text = ""
-       lblEncrypted.textColor = Color.fontTextColor
-       lblEncrypted.layer.borderWidth = 1
-       lblEncrypted.layer.borderColor = UIColor.gray.cgColor
-       lblEncrypted.numberOfLines = 0
-       lblEncrypted.font = UIFont.boldSystemFont(ofSize: 15)
-       lblEncrypted.translatesAutoresizingMaskIntoConstraints = false
-       return lblEncrypted
-   }()
+        let lblEncrypted = UITopAlignedLabel()
+        lblEncrypted.text = ""
+        lblEncrypted.textColor = Color.fontTextColor
+        lblEncrypted.layer.borderWidth = Constants.border
+        lblEncrypted.layer.borderColor = UIColor.gray.cgColor
+        lblEncrypted.numberOfLines = 0
+        lblEncrypted.font = UIFont.boldSystemFont(ofSize: Constants.normalFontSize)
+        lblEncrypted.translatesAutoresizingMaskIntoConstraints = false
+        return lblEncrypted
+    }()
     
     lazy var btnDecrypt : UIButton = {
-       let btnSubmit = UIButton()
-       btnSubmit.setTitle("Decrypt Secure Envelope", for: .normal)
-       btnSubmit.backgroundColor = Color.buttonBackgroundColor
-       btnSubmit.setTitleColor(UIColor.white, for: .normal)
-       btnSubmit.clipsToBounds = true
-       btnSubmit.layer.cornerRadius = 10.0
-       return btnSubmit
-   }()
+        let btnSubmit = UIButton()
+        btnSubmit.setTitle("Decrypt Secure Envelope", for: .normal)
+        btnSubmit.backgroundColor = Color.buttonBackgroundColor
+        btnSubmit.setTitleColor(UIColor.white, for: .normal)
+        btnSubmit.clipsToBounds = true
+        btnSubmit.layer.cornerRadius = Constants.cornerRadius
+        return btnSubmit
+    }()
     
     init() {
         super.init(frame: .zero)
@@ -60,10 +64,9 @@ class DetailView: UIView {
     }
     
     private func addSubviews() {
-        addSubview(viewContainer)
         [lblTitle, lblDecrypt, btnDecrypt]
             .forEach {
-                viewContainer.addSubview($0)
+                addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
     }
@@ -76,24 +79,21 @@ class DetailView: UIView {
 
 extension DetailView {
     private func makeAutolayout() {
-        viewContainer.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
-        viewContainer.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
-        viewContainer.rightAnchor.constraint(equalTo: safeArea.rightAnchor).isActive = true
-        viewContainer.leftAnchor.constraint(equalTo: safeArea.leftAnchor).isActive = true
-        
-        lblTitle.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 20).isActive = true
-        lblTitle.rightAnchor.constraint(equalTo: viewContainer.rightAnchor, constant: -10).isActive = true
-        lblTitle.leftAnchor.constraint(equalTo: viewContainer.leftAnchor, constant: 10).isActive = true
-        lblTitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
-        lblDecrypt.topAnchor.constraint(equalTo: lblTitle.bottomAnchor, constant: 20).isActive = true
-        lblDecrypt.rightAnchor.constraint(equalTo: viewContainer.rightAnchor, constant: -10).isActive = true
-        lblDecrypt.leftAnchor.constraint(equalTo: viewContainer.leftAnchor, constant: 10).isActive = true
-        lblDecrypt.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        
-        btnDecrypt.topAnchor.constraint(equalTo: lblDecrypt.bottomAnchor, constant: 20).isActive = true
-        btnDecrypt.rightAnchor.constraint(equalTo: viewContainer.rightAnchor, constant: -10).isActive = true
-        btnDecrypt.leftAnchor.constraint(equalTo: viewContainer.leftAnchor, constant: 10).isActive = true
-        btnDecrypt.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        NSLayoutConstraint.activate([
+            lblTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: Constants.padding1),
+            lblTitle.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -Constants.padding1),
+            lblTitle.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: Constants.padding1),
+            lblTitle.heightAnchor.constraint(equalToConstant: 50),
+            
+            lblDecrypt.topAnchor.constraint(equalTo: lblTitle.bottomAnchor, constant: Constants.padding2),
+            lblDecrypt.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -Constants.padding1),
+            lblDecrypt.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: Constants.padding1),
+            lblDecrypt.heightAnchor.constraint(equalToConstant: 200),
+            
+            btnDecrypt.topAnchor.constraint(equalTo: lblDecrypt.bottomAnchor, constant: Constants.padding2),
+            btnDecrypt.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -Constants.padding1),
+            btnDecrypt.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: Constants.padding1),
+            btnDecrypt.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 }

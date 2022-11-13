@@ -24,13 +24,14 @@ public enum CryptoException: Error {
 }
 
 struct AESKeyManager {
-    // generate and set AES random IV and random KEY string
+    // generate and set AES random IV and random Key String
     static func generateAESKeys() -> AESHelper? {
         func generateRandomString(length: Int) -> String {
             let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
             return String((0..<length).map{ _ in letters.randomElement()! })
         }
-        return AESHelper(iv: generateRandomString(length: 16), key: generateRandomString(length: 16))
+        return AESHelper(iv: generateRandomString(length: 16),
+                         key: generateRandomString(length: 16))
     }
 }
 

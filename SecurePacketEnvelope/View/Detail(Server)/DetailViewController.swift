@@ -42,7 +42,6 @@ final class DetailViewController: UIViewController {
     }
     
     private func decryptData(data : RequestSecureEnvelop) {
-
         // create a instance from RSAHelper
         let rsa : RSAKeyPair = RSAKeyPair()
         // decrypt AES Secret Key with RSA

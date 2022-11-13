@@ -31,7 +31,9 @@ struct RSAKeyPair : RSAHelperProtocol {
         guard let privateKey = RSAKeyManager.getPrivateKey() else {return nil}
         let data = NSData(base64Encoded: encrpted, options: .ignoreUnknownCharacters)!
         var error: Unmanaged<CFError>?
-        if let decryptedData: Data = SecKeyCreateDecryptedData(privateKey, RSAConfig.rsaAlgorithm, data as CFData, &error) as? Data {
+        if let decryptedData: Data = SecKeyCreateDecryptedData(privateKey,
+                                                               RSAConfig.rsaAlgorithm,
+                                                               data as CFData, &error) as? Data {
             if error != nil {
                 return nil
             } else {
@@ -62,7 +64,9 @@ struct RSAPublicKey : RSAPublicKeyProtocol {
         guard let pubKey = RSAKeyManager.getPublicKey() else {return nil}
         guard let data = text.data(using: String.Encoding.utf8) else {return nil}
         var error: Unmanaged<CFError>?
-        if let encryptedData: Data = SecKeyCreateEncryptedData(pubKey, RSAConfig.rsaAlgorithm, data as CFData, &error) as? Data {
+        if let encryptedData: Data = SecKeyCreateEncryptedData(pubKey,
+                                                               RSAConfig.rsaAlgorithm,
+                                                               data as CFData, &error) as? Data {
             if error != nil {
                 return nil
             } else {

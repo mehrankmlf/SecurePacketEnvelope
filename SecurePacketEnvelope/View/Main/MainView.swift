@@ -9,20 +9,23 @@ import UIKit
 
 class MainView: UIView {
     
-    private var safeArea: UILayoutGuide!
+    private enum Constants {
+        static let titleFontSize  : CGFloat = 35
+        static let normalFontSize : CGFloat = 15
+        static let border         : CGFloat = 1.0
+        static let cornerRadius   : CGFloat = 10.0
+        static let padding1       : CGFloat = 20.0
+        static let padding2       : CGFloat = 30.0
+        static let generalHeight  : CGFloat = 25.0
+    }
     
-    var viewContainer : UIView = {
-        let viewContainer = UIView()
-        viewContainer.backgroundColor = .white
-        return viewContainer
-    }()
+    private var safeArea: UILayoutGuide!
     
     lazy var lblTitle : UILabel = {
         let lblTop = UILabel()
         lblTop.text = "Enter Your Data"
         lblTop.textColor = Color.fontTextColor
-        lblTop.font = UIFont.boldSystemFont(ofSize: 35)
-        lblTop.translatesAutoresizingMaskIntoConstraints = false
+        lblTop.font = UIFont.boldSystemFont(ofSize: Constants.titleFontSize)
         return lblTop
     }()
     
@@ -30,7 +33,7 @@ class MainView: UIView {
         let lblTop = UILabel()
         lblTop.text = "Full Name"
         lblTop.textColor = Color.fontTextColor
-        lblTop.font = UIFont.boldSystemFont(ofSize: 15)
+        lblTop.font = UIFont.boldSystemFont(ofSize: Constants.normalFontSize)
         lblTop.translatesAutoresizingMaskIntoConstraints = false
         return lblTop
     }()
@@ -39,7 +42,7 @@ class MainView: UIView {
         let lblTop = UILabel()
         lblTop.text = "Email"
         lblTop.textColor = Color.fontTextColor
-        lblTop.font = UIFont.boldSystemFont(ofSize: 15)
+        lblTop.font = UIFont.boldSystemFont(ofSize: Constants.normalFontSize)
         lblTop.translatesAutoresizingMaskIntoConstraints = false
         return lblTop
     }()
@@ -48,7 +51,7 @@ class MainView: UIView {
         let lblAge = UILabel()
         lblAge.text = "Age"
         lblAge.textColor = Color.fontTextColor
-        lblAge.font = UIFont.boldSystemFont(ofSize: 15)
+        lblAge.font = UIFont.boldSystemFont(ofSize: Constants.normalFontSize)
         lblAge.translatesAutoresizingMaskIntoConstraints = false
         return lblAge
     }()
@@ -58,7 +61,7 @@ class MainView: UIView {
         txtFullName.textColor = UIColor.gray
         txtFullName.borderStyle = .line
         txtFullName.layer.borderColor = UIColor.gray.cgColor
-        txtFullName.layer.borderWidth = 1.0
+        txtFullName.layer.borderWidth = Constants.border
         return txtFullName
     }()
     
@@ -67,7 +70,7 @@ class MainView: UIView {
         txtEmail.textColor = UIColor.gray
         txtEmail.borderStyle = .line
         txtEmail.layer.borderColor = UIColor.gray.cgColor
-        txtEmail.layer.borderWidth = 1.0
+        txtEmail.layer.borderWidth = Constants.border
         return txtEmail
     }()
     
@@ -76,7 +79,7 @@ class MainView: UIView {
         txtAge.textColor = UIColor.gray
         txtAge.borderStyle = .line
         txtAge.layer.borderColor = UIColor.gray.cgColor
-        txtAge.layer.borderWidth = 1.0
+        txtAge.layer.borderWidth = Constants.border
         txtAge.keyboardType = .numberPad
         return txtAge
     }()
@@ -92,7 +95,6 @@ class MainView: UIView {
         stackView.distribution  = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 5
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -102,8 +104,7 @@ class MainView: UIView {
         btnSubmit.backgroundColor = Color.buttonBackgroundColor
         btnSubmit.setTitleColor(UIColor.white, for: .normal)
         btnSubmit.clipsToBounds = true
-        btnSubmit.layer.cornerRadius = 10.0
-        btnSubmit.translatesAutoresizingMaskIntoConstraints = false
+        btnSubmit.layer.cornerRadius = Constants.cornerRadius
         return btnSubmit
     }()
     
@@ -119,12 +120,13 @@ class MainView: UIView {
     }
     
     private func addSubviews() {
-        let elements = [lblTitle,
-                        statsView,
-                        btnEncrypt]
-        for element in elements {
-            addSubview(element)
-        }
+        [lblTitle,
+         statsView,
+         btnEncrypt]
+            .forEach {
+                addSubview($0)
+                $0.translatesAutoresizingMaskIntoConstraints = false
+            }
     }
     
     private func setupUI() {
@@ -135,19 +137,20 @@ class MainView: UIView {
 
 extension MainView {
     private func makeAutolayout() {
-        
-        lblTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20).isActive = true
-        lblTitle.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 30).isActive = true
-        lblTitle.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -30).isActive = true
-        lblTitle.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
-        
-        statsView.topAnchor.constraint(equalTo: lblTitle.bottomAnchor, constant: 20).isActive = true
-        statsView.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 30).isActive = true
-        statsView.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -30).isActive = true
-        
-        btnEncrypt.topAnchor.constraint(equalTo: statsView.bottomAnchor, constant: 30).isActive = true
-        btnEncrypt.leadingAnchor.constraint(equalTo: statsView.leadingAnchor).isActive = true
-        btnEncrypt.trailingAnchor.constraint(equalTo: statsView.trailingAnchor).isActive = true
-        btnEncrypt.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        NSLayoutConstraint.activate([
+            lblTitle.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: Constants.padding1),
+            lblTitle.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: Constants.padding2),
+            lblTitle.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -Constants.padding2),
+            lblTitle.heightAnchor.constraint(equalToConstant: 40.0),
+            
+            statsView.topAnchor.constraint(equalTo: lblTitle.bottomAnchor, constant:  Constants.padding1),
+            statsView.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: Constants.padding2),
+            statsView.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -Constants.padding2),
+            
+            btnEncrypt.topAnchor.constraint(equalTo: statsView.bottomAnchor, constant: Constants.padding2),
+            btnEncrypt.leadingAnchor.constraint(equalTo: statsView.leadingAnchor),
+            btnEncrypt.trailingAnchor.constraint(equalTo: statsView.trailingAnchor),
+            btnEncrypt.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 }

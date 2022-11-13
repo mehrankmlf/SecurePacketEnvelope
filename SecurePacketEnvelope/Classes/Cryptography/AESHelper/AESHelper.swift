@@ -8,9 +8,11 @@
 import Foundation
 import CommonCrypto
 
-protocol AESHelperProtocol {
-    func aesEncrypt(data: String) -> String?
-    func aesDecrypt(data : String, key: String, iv: String) -> String?
+enum AESConfig {
+    static let padding : Int = kCCOptionPKCS7Padding
+    static let encryptOperation = kCCEncrypt
+    static let decryptOperation = kCCDecrypt
+    static let algorithm = kCCAlgorithmAES
 }
 
 final class AESHelper : AESHelperProtocol {
@@ -22,7 +24,7 @@ final class AESHelper : AESHelperProtocol {
         self.iv = iv
         self.key = key
     }
-
+    
     convenience init() {
         self.init(iv: "", key: "")
     }
@@ -32,53 +34,37 @@ final class AESHelper : AESHelperProtocol {
             let data = data.data(using: .utf8),
             let key = self.key.data(using: .utf8),
             let iv = self.iv.data(using: .utf8),
-            let encrypt = data.encryptAES256(key: key, iv: iv)
+            let encrypt = aesCrypt(operation: AESConfig.encryptOperation,
+                                   algorithm: AESConfig.algorithm,
+                                   options: AESConfig.padding,
+                                   key: key,
+                                   initializationVector: iv,
+                                   dataIn: data)
         else { return nil }
         let base64Data = encrypt.base64EncodedData()
         return String(data: base64Data, encoding: .utf8)
     }
-    
-    func aesDecrypt(data : String, key: String, iv: String) -> String? {
-        guard
-            let data = Data(base64Encoded: data),
-            let key = key.data(using: .utf8),
-            let iv = iv.data(using: .utf8),
-            let decrypt = data.decryptAES256(key: key, iv: iv)
-        else { return nil }
-        return String(data: decrypt, encoding: .utf8)
-    }
-}
-
-/// @see http://www.splinter.com.au/2019/06/09/pure-swift-common-crypto-aes-encryption/
-private extension Data {
+    ///  Key can be 128/192/256 bits.
     /// Encrypts for you with all the good options turned on: CBC, an IV, PKCS7
     /// padding (so your input data doesn't have to be any particular length).
     /// Key can be 128, 192, or 256 bits.
     /// Generates a fresh IV for you each time, and prefixes it to the
     /// returned ciphertext.
-    func encryptAES256(key: Data, iv: Data, options: Int = kCCOptionPKCS7Padding) -> Data? {
-        // No option is needed for CBC, it is on by default.
-        return aesCrypt(operation: kCCEncrypt,
-                        algorithm: kCCAlgorithmAES,
-                        options: options,
-                        key: key,
-                        initializationVector: iv,
-                        dataIn: self)
+    func aesDecrypt(data : String, key: String, iv: String) -> String? {
+        guard
+            let data = Data(base64Encoded: data),
+            let key = key.data(using: .utf8),
+            let iv = iv.data(using: .utf8),
+            let decrypt = aesCrypt(operation: AESConfig.decryptOperation,
+                                   algorithm: AESConfig.algorithm,
+                                   options: AESConfig.padding,
+                                   key: key,
+                                   initializationVector: iv,
+                                   dataIn: data)
+        else { return nil }
+        return String(data: decrypt, encoding: .utf8)
     }
     
-    /// Decrypts self, where self is the IV then the ciphertext.
-    /// Key can be 128/192/256 bits.
-    func decryptAES256(key: Data, iv: Data, options: Int = kCCOptionPKCS7Padding) -> Data? {
-        guard count > kCCBlockSizeAES128 else { return nil }
-        return aesCrypt(operation: kCCDecrypt,
-                        algorithm: kCCAlgorithmAES,
-                        options: options,
-                        key: key,
-                        initializationVector: iv,
-                        dataIn: self)
-    }
-    
-    // swiftlint:disable:next function_parameter_count
     private func aesCrypt(operation: Int,
                           algorithm: Int,
                           options: Int,
