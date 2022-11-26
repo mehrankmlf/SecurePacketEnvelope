@@ -11,7 +11,7 @@ Public-key ciphers (ie. RSA) are generally slow, inefficient, and have a plainte
 
 ### Features
 * No third-party dependencies
-* Lightweight implementation of AES256-CBC with automatic salt + IV randomization.
+* Lightweight implementation of AES256-CBC with generated Random Key + IV.
 * Cryptography logic derived from Apple's reliable CommonCrypto library
 
 ## License
