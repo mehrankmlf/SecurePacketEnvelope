@@ -12,7 +12,7 @@ final class MainViewController: UIViewController {
     
     var viewModel : MainViewModel?
     var contentView : MainView?
-    var bag = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>()
     
     init(viewModel : MainViewModel, contentView: MainView){
         self.viewModel = viewModel
@@ -110,7 +110,7 @@ extension MainViewController {
                 } else {
                     self.contentView?.txtFullName.addRightView(txtField:  textField, str: "👍🏻")
                 }
-            }.store(in: &bag)
+            }.store(in: &cancellables)
         
         viewModel?.formValidation
             .map { $0 != nil}
@@ -124,7 +124,7 @@ extension MainViewController {
                 }
                 self.contentView?.btnEncrypt.isEnabled = false
             })
-            .store(in: &bag)
+            .store(in: &cancellables)
     }
 }
 
