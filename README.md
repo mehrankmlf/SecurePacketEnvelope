@@ -6,10 +6,10 @@ It is created with UIKit, CommonCrypto, Combine.
 ### How to run
 SecurePacketEnvelope requires iOS 13.0 or later. If you are developer, you can set its deployment target to lower iOS version if needed.
 
-Hybrid Encryption
+### Hybrid Encryption
 Public-key ciphers (ie. RSA) are generally slow, inefficient, and have a plaintext size limit. Symmetric ciphers (ie. AES) require secure key exchange, which may not always be possible. Hybrid cryptosystems use both types of ciphers in tandem to efficiently encrypt plaintext, without requiring secure key exchange.
 
-Features
+### Features
 No third-party dependencies
 Lightweight implementation of AES256-CBC with automatic salt + IV randomization.
 Cryptography logic derived from Apple's reliable CommonCrypto library
