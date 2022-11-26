@@ -116,7 +116,12 @@ class MainView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        return nil
+    }
+    
+    private func setupUI() {
+        backgroundColor = Color.backGroundColor
+        safeArea = self.safeAreaLayoutGuide
     }
     
     private func addSubviews() {
@@ -127,11 +132,6 @@ class MainView: UIView {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
-    }
-    
-    private func setupUI() {
-        backgroundColor = Color.backGroundColor
-        safeArea = self.safeAreaLayoutGuide
     }
 }
 

@@ -8,6 +8,8 @@
 import Foundation
 
 protocol AESHelperProtocol {
+    var iv : String { get }
+    var key : String { get }
     func aesEncrypt(data: String) -> String?
     func aesDecrypt(data : String, key: String, iv: String) -> String?
 }

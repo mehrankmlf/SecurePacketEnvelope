@@ -8,7 +8,7 @@
 import Foundation
 
 extension Encodable {
-    var convertToString: String? {
+    var convertToStringJSON: String? {
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = .prettyPrinted
         do {

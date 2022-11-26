@@ -23,9 +23,9 @@ public enum CryptoException: Error {
     case outOfMemory
 }
 
-struct AESKeyManager {
+struct AESKeyManager: AESKeyManagerProtocol {
     // generate and set AES random IV and random Key String
-    static func generateAESKeys() -> AESHelper? {
+    static func generateAESKeys() -> AESHelperProtocol {
         func generateRandomString(length: Int) -> String {
             let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
             return String((0..<length).map{ _ in letters.randomElement()! })

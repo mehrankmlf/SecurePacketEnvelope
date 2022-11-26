@@ -14,8 +14,7 @@ final class MainViewController: UIViewController {
     var contentView : MainView?
     var bag = Set<AnyCancellable>()
     
-    init(viewModel : MainViewModel,
-         contentView : MainView){
+    init(viewModel : MainViewModel, contentView: MainView){
         self.viewModel = viewModel
         self.contentView = contentView
         super.init(nibName: nil, bundle: nil)
@@ -26,7 +25,7 @@ final class MainViewController: UIViewController {
     }
     
     override func loadView() {
-        view = contentView
+        self.view = contentView
     }
     
     override func viewDidLoad() {
@@ -56,19 +55,22 @@ final class MainViewController: UIViewController {
     @objc func txtEmail_EditingChanged(textField: UITextField) {
         self.viewModel?.email = textField.text ?? ""
     }
-    
-    private func jsonModel() -> String {
-        let userData = UserModel.init(fullName: self.contentView?.txtFullName.text,
-                                      email: self.contentView?.txtEmail.text,
-                                      age: Int(self.contentView?.txtAge.text ?? ""))
-        return userData.convertToString ?? ""
-    }  
-    
-    private func createSecruePacketEnvelope() -> (String, String, String) {
+    // Step 1
+    func getUserData() -> UserModel {
+        return UserModel.init(fullName: self.contentView?.txtFullName.text,
+                              email: self.contentView?.txtEmail.text,
+                              age: Int(self.contentView?.txtAge.text ?? ""))
+    }
+    // Step 2
+    func convertUserDataToJson() -> String? {
+        return getUserData().convertToStringJSON
+    }
+    // Step 3
+    func createSecruePacketEnvelope() -> (String, String, String) {
         // generate IV and sercret Key for AES Data encryption.
-        let aes : AESHelper = AESKeyManager.generateAESKeys()!
+        let aes : AESHelperProtocol = AESKeyManager.generateAESKeys()
         // encrypt converted string json with AES128 algorithm.
-        let encryptedAES : String = aes.aesEncrypt(data: self.jsonModel())!
+        let encryptedAES : String = aes.aesEncrypt(data: convertUserDataToJson() ?? "")!
         // encrypt AES key with RSA
         
         // generate RSA keypair.
@@ -80,15 +82,15 @@ final class MainViewController: UIViewController {
         // retrun encrypted data
         return (encryptedAES, encryptedRSA, aes.iv)
     }
-    
-    private func createSecureWalletEnvelop() -> RequestSecureEnvelop {
+    // Step 4
+    func createSecureEnvelop() -> SecureEnvelopRequest {
         let (data, key, iv) = createSecruePacketEnvelope()
-        return RequestSecureEnvelop(encryptedData: data, encryptedKey: key, iv: iv)
+        return SecureEnvelopRequest(encryptedData: data, encryptedKey: key, iv: iv)
     }
     
-    private func encryptAndPushToServerVC() {
+    func encryptAndPushToServerVC() {
         let vc = DetailViewController(contentView: DetailView())
-        vc.data = self.createSecureWalletEnvelop()
+        vc.data = self.createSecureEnvelop()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -99,14 +101,14 @@ extension MainViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] text in
                 
-                guard let `self` = self, let txtFullName = self.contentView?.txtFullName else {
+                guard let `self` = self, let textField = self.contentView?.txtFullName else {
                     return
                 }
                 
                 if text != "" {
-                    self.contentView?.txtFullName.addRightView(txtField: txtFullName, str: "")
+                    self.contentView?.txtFullName.addRightView(txtField:  textField, str: "")
                 } else {
-                    self.contentView?.txtFullName.addRightView(txtField: txtFullName, str: "👍🏻")
+                    self.contentView?.txtFullName.addRightView(txtField:  textField, str: "👍🏻")
                 }
             }.store(in: &bag)
         

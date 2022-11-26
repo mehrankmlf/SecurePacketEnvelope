@@ -1,30 +1,30 @@
 //
-//  RSATest.swift
+//  AESTest.swift
 //  SecurePacketEnvelopeTests
 //
-//  Created by Mehran Kamalifard on 10/18/22.
+//  Created by Mehran Kamalifard on 11/13/22.
 //
 
 import XCTest
 @testable import SecurePacketEnvelope
 
-final class RSATest: XCTestCase {
+class AESTest: XCTestCase {
     
-    var rsaPublicKeyHelper : RSAPublicKeyProtocol!
+    var aesHelper : AESHelperProtocol!
 
     override func setUp() {
-        rsaPublicKeyHelper = MockRSAPublicKey()
+        aesHelper = MockAESHelper()
     }
     
     override func tearDown() {
-        rsaPublicKeyHelper = nil
+        aesHelper = nil
         super.tearDown()
     }
     
-    func test_encryption_withRSA_SouldReturnBase64String() {
+    func test_encryption_withAES_SouldReturnBase64String() {
         let plainText = "PlainText"
         
-        let encrypted = rsaPublicKeyHelper.encryptBase64(text: plainText)
+        let encrypted = aesHelper.aesEncrypt(data: plainText)
         
         XCTAssertTrue(encrypted as Any is String)
         XCTAssertNotNil(Data(base64Encoded: encrypted!))

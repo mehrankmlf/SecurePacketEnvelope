@@ -52,7 +52,7 @@ extension MainViewModel {
                     return nil
                 }
                 
-                guard validateEmail.count > 2 else {
+                guard validateEmail.count > 5 else {
                     self.emailMessagePublisher.send("Minimum of 3 characters required")
                     return nil
                 }

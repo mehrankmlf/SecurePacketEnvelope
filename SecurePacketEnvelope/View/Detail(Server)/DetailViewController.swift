@@ -10,7 +10,7 @@ import UIKit
 final class DetailViewController: UIViewController {
     
     var contentView : DetailView?
-    var data : RequestSecureEnvelop?
+    var data : SecureEnvelopRequest?
     
     init(contentView : DetailView) {
         self.contentView = contentView
@@ -37,11 +37,11 @@ final class DetailViewController: UIViewController {
     }
     
     @objc func decryptAction() {
-        guard let data = self.data else {return}
         self.decryptData(data: data)
     }
     
-    private func decryptData(data : RequestSecureEnvelop) {
+    private func decryptData(data : SecureEnvelopRequest?) {
+        guard let data = data else {return}
         // create a instance from RSAHelper
         let rsa : RSAKeyPair = RSAKeyPair()
         // decrypt AES Secret Key with RSA

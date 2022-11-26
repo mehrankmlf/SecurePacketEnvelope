@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RequestSecureEnvelop {
+struct SecureEnvelopRequest {
     var encryptedData : String
     var encryptedKey : String
     var iv : String
