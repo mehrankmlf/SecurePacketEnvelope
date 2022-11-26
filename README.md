@@ -7,3 +7,7 @@ How to run
 SecurePacketEnvelope requires iOS 12.0 or later. If you are developer, you can set its deployment target to lower iOS version if needed.
 
 If your XCode 12.0 is not available, you can change deployment target to lower iOS version.
+
+## License
+
+SecurityKit is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
