@@ -4,7 +4,7 @@ SecurePacketEnvelope is a hybrid cryptosystem that encrypts user sensitive data 
 It is created with UIKit, CommonCrypto, Combine.
 
 How to run
-SecurePacketEnvelope requires iOS 12.0 or later. If you are developer, you can set its deployment target to lower iOS version if needed.
+SecurePacketEnvelope requires iOS 13.0 or later. If you are developer, you can set its deployment target to lower iOS version if needed.
 
 If your XCode 12.0 is not available, you can change deployment target to lower iOS version.
 
