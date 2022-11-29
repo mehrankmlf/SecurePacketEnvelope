@@ -14,6 +14,11 @@ Public-key ciphers (ie. RSA) are generally slow, inefficient, and have a plainte
 * Lightweight implementation of AES256-CBC with generated Random Key + IV.
 * Cryptography logic derived from Apple's reliable CommonCrypto library
 
+## Usage
+I have explained about SecurePacketEnvelope in the form of a post on Medium.
+
+https://medium.com/@mehran.kmlf/build-a-secure-envelope-in-ios-swift-f1f0297d2562
+
 ## License
 
 SecurityKit is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
