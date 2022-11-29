@@ -34,7 +34,7 @@ final class AESHelper : AESHelperProtocol {
             let data = data.data(using: .utf8),
             let key = self.key.data(using: .utf8),
             let iv = self.iv.data(using: .utf8),
-            let encrypt = aesCrypt(operation: AESConfig.encryptOperation,
+            let encrypt = aes_CBC_256(operation: AESConfig.encryptOperation,
                                    algorithm: AESConfig.algorithm,
                                    options: AESConfig.padding,
                                    key: key,
@@ -55,7 +55,7 @@ final class AESHelper : AESHelperProtocol {
             let data = Data(base64Encoded: data),
             let key = key.data(using: .utf8),
             let iv = iv.data(using: .utf8),
-            let decrypt = aesCrypt(operation: AESConfig.decryptOperation,
+            let decrypt = aes_CBC_256(operation: AESConfig.decryptOperation,
                                    algorithm: AESConfig.algorithm,
                                    options: AESConfig.padding,
                                    key: key,
@@ -65,7 +65,7 @@ final class AESHelper : AESHelperProtocol {
         return String(data: decrypt, encoding: .utf8)
     }
     
-    private func aesCrypt(operation: Int,
+    private func aes_CBC_256(operation: Int,
                           algorithm: Int,
                           options: Int,
                           key: Data,
