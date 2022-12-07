@@ -21,4 +21,4 @@ https://medium.com/@mehran.kmlf/build-a-secure-envelope-in-ios-swift-f1f0297d256
 
 ## License
 
-SecurityKit is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
+SecurePacketEnvelope is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
