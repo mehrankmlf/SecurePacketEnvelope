@@ -1,3 +1,4 @@
+![GitHub Cards Preview](https://user-images.githubusercontent.com/24524023/229168910-eba2e77b-5f2d-4038-9ddf-c00aef14f043.png?raw=true)
 # SecurePacketEnvelope
 SecurePacketEnvelope is a hybrid cryptosystem that encrypts user sensitive data efficiently and securely, supporting symmetric and asymmetric encryption algorithms. SecurePacketEnvelope uses AES256-CBC-PKCS7 and RSA-2048 by default.
 
